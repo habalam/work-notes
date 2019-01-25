@@ -1,0 +1,6 @@
+= Work notes - notes (not only) for work
+
+Application should work as work/task log for tracking of task, set ups priority of selected ones and
+
+
+== Progress

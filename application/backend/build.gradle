@@ -1,0 +1,6 @@
+dependencies {
+	implementation 'com.h2database:h2:1.4.197'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.1.2.RELEASE'
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa:2.1.2.RELEASE'
+	testImplementation 'junit:junit:4.+'
+}
