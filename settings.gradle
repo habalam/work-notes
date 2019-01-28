@@ -1,4 +1,5 @@
 rootProject.name = 'work-notes'
 
+include 'application:domain'
 include 'application:backend'
 include 'application:frontend'
