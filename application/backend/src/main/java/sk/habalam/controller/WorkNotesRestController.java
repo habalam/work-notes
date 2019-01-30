@@ -1,31 +1,26 @@
 package sk.habalam.controller;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import sk.habalam.domain.Note;
+import sk.habalam.respository.NoteRepository;
 
 //TODO vymyslieť obsah triedy a následne korektne pomenovať
-@SuppressWarnings("unused")
 @RestController
 public class WorkNotesRestController {
 
+	private final NoteRepository noteRepository;
+
 	@Autowired
-	private DataSource dataSource;
+	public WorkNotesRestController(NoteRepository noteRepository) {
+		this.noteRepository = noteRepository;
+	}
 
-	@PersistenceUnit
-	private EntityManagerFactory entityManagerFactory;
-
-	@PersistenceContext
-	private EntityManager entityManger;
-
-	@GetMapping(value = "/notesIds")
-	public String getNodeIds() {
-		return Integer.toString(2);
+	@GetMapping(value = "/noteById/{ID}")
+	public String getNodeIds(@PathVariable("ID") Integer noteId) {
+		Note note = noteRepository.findById(noteId);
+		return note.getId().toString();
 	}
 }

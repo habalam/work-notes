@@ -1,22 +1,30 @@
 package sk.habalam.configuration;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 
+/**
+ * Provide DB connection configuration and JPA configuration. Configuration file is diffent for "main" and "test"
+ * scope, so application run in test scope will work on H2 "in-memory" DB and "main" on other
+ * */
 @Configuration
-@PropertySource("classpath:jpa-configuration.properties")
+@PropertySource("classpath:jpa.properties")
 public class DataSourceConfiguration {
 
-	@Bean
+	//TODO mohol by som pouzit proste len application.properties co by my dalo vacsiu volnost pri pouzivani Spring profilov
+	@Bean(name = "entityMangerFactory")
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean emFactory = new LocalContainerEntityManagerFactoryBean();
 		emFactory.setDataSource(dataSource());
@@ -31,6 +39,11 @@ public class DataSourceConfiguration {
 	@ConfigurationProperties(prefix = "jpa")
 	public JpaConfiguration jpaConfiguration() {
 		return new JpaConfiguration();
+	}
+
+	@Bean
+	public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+		return new JpaTransactionManager(entityManagerFactory);
 	}
 
 	@Bean

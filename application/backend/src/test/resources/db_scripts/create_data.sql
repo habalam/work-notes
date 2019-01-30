@@ -1,0 +1,1 @@
+INSERT INTO WN_NOTE values (2);

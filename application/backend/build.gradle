@@ -6,6 +6,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web:2.1.2.RELEASE'
 	
 	implementation 'com.h2database:h2:1.4.197'
+	compile 'com.google.guava:guava:27.0.1-jre'
 
 	testImplementation 'junit:junit:4.+'
 }

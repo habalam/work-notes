@@ -1,5 +1,7 @@
 package sk.habalam.respository;
 
+import java.util.List;
+
 import sk.habalam.domain.Note;
 
 /**
@@ -10,4 +12,6 @@ import sk.habalam.domain.Note;
 public interface NoteRepository {
 
 	Note findById(int id);
+
+	List<Note> findAll();
 }
