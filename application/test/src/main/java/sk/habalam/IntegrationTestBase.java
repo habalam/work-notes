@@ -14,6 +14,8 @@ import sk.habalam.configuration.DbInitConfiguration;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {DbInitConfiguration.class})
 @EnableConfigurationProperties
+//TODO spravit samostatny novy modul, ktory by obsahoval konfiguraciu testov/test scope a vsetky ostatne
+// moduly by od neho dedili (ale tiez iba v test scope)
 public abstract class IntegrationTestBase  {
 
 	@PersistenceUnit
@@ -33,6 +35,13 @@ public abstract class IntegrationTestBase  {
 		}
 		this.entityManager = entityManagerFactory.createEntityManager();
 		createDataPreparator();
+	}
+
+	protected void recreatePersistenceContext() {
+		if (entityManager != null) {
+			entityManager.close();
+		}
+		createPersistenceContext();
 	}
 
 	private void createDataPreparator() {
