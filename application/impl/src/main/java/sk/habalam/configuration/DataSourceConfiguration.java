@@ -21,8 +21,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @PropertySource("classpath:jpa.properties")
 public class DataSourceConfiguration {
 
-	//TODO mohol by som pouzit proste len application.properties co by my dalo vacsiu volnost pri pouzivani Spring profilov
-	@Bean(name = "entityMangerFactory")
+	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean emFactory = new LocalContainerEntityManagerFactoryBean();
 		emFactory.setDataSource(dataSource());
