@@ -1,13 +1,16 @@
 package sk.habalam;
 
+import java.lang.reflect.Method;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 
-import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -22,18 +25,25 @@ import sk.habalam.annotation.MethodScopeData;
  * but in this case test classes (extends this one) can't resolve autowired components (they are
  * autowired but IDEA don't know about it).
  * */
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 //@SpringBootTest(classes = {DbInitConfiguration.class})
 //@ComponentScan("sk.habalam")
 @EnableConfigurationProperties
 @TestPropertySource(locations = "classpath:jpa-integration-test.properties")
-public abstract class IntegrationTestBase  {
+public abstract class IntegrationTestBase extends AbstractTestNGSpringContextTests {
+
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@PersistenceUnit
 	private EntityManagerFactory entityManagerFactory;
 
 	protected EntityManager entityManager;
 	protected DataPreparator dataPreparator;
+
+	@BeforeMethod
+	public final void reportMethodName(Method method) {
+		logger.info("TEST method: " + method.getDeclaringClass().getName() + " - " + method.getName());
+	}
 
 	@BeforeClass
 	public final void initDataBeforeClass() {

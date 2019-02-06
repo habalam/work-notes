@@ -1,5 +1,13 @@
 subprojects {
 	apply plugin: 'java'
+
+	compileJava {
+		options.encoding = sourceEncoding
+	}
+
+	compileTestJava {
+		options.encoding = sourceEncoding
+	}
 	
 	repositories {
 		jcenter()

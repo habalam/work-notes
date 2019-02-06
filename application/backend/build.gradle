@@ -1,5 +1,4 @@
 dependencies {
-	compile project(':application:domain')
 	compile project(':application:impl')
 	testCompile project(':application:test')
 

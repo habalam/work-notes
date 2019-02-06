@@ -4,7 +4,7 @@
 >
 	<persistence-unit name="work-notes-jpa">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>sk.habalam.domain.Note</class>
+		<class>sk.habalam.domain.Task</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	</persistence-unit>
 </persistence>
