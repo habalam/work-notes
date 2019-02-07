@@ -26,6 +26,7 @@ public class Task {
 	private TaskStatus status;
 	private LocalDateTime created;
 	private LocalDateTime closed;
+	//TODO pridať nejaku temu, ku ktorej task moze patriť
 
 	@Id
 	@Column(name = "ID", nullable = false, unique = true, precision = 10)

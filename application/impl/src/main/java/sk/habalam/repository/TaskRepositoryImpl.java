@@ -1,22 +1,17 @@
 package sk.habalam.repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import com.querydsl.jpa.JPQLTemplates;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 import sk.habalam.domain.QTask;
 import sk.habalam.domain.Task;
 import sk.habalam.respository.TaskRepository;
 
 @Repository
-public class TaskRepositoryImpl implements TaskRepository {
-
-	@PersistenceContext
-	private EntityManager entityManager;
+public class TaskRepositoryImpl extends RepositoryBase implements TaskRepository {
 
 	@Override
 	public Task findById(int id) {
@@ -25,6 +20,15 @@ public class TaskRepositoryImpl implements TaskRepository {
 
 	@Override
 	public List<Task> findAll() {
-		return new JPAQueryFactory(JPQLTemplates.DEFAULT, entityManager).selectFrom(QTask.task).fetch();
+		return jpaQueryFactory.selectFrom(QTask.task).fetch();
+	}
+
+	@Override
+	public List<Task> findByDate(LocalDate date) {
+		return jpaQueryFactory.selectFrom(QTask.task)
+			.where(QTask.task.created.loe(LocalDateTime.of(date, LocalTime.MAX))
+				.and(QTask.task.closed.goe(LocalDateTime.of(date, LocalTime.MIDNIGHT))
+					.or(QTask.task.closed.isNull())))
+			.fetch();
 	}
 }

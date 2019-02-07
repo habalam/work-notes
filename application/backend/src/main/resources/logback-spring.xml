@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- pripadne -->
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+	<logger name="sk.habalam" level="INFO"/>
+
+	<logger name="org.hibernate" level="WARN"/>
+	<logger name="org.springframework" level="WARN"/>
+</configuration>

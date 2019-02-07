@@ -17,12 +17,12 @@ class DataPreparator {
 	}
 
 	public Task createTask(TaskPriority taskPriority, LocalDateTime created, LocalDateTime closed,
-		String taskText, TaskStatus taskStatus)
+		TaskStatus taskStatus)
 	{
 		Task task = new Task();
 		task.setPriority(taskPriority);
 		task.setStatus(taskStatus);
-		task.setText(taskText);
+		task.setText("Test_text");
 		task.setCreated(created);
 		task.setClosed(closed);
 		entityManger.persist(task);

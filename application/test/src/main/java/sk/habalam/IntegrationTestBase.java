@@ -32,7 +32,7 @@ import sk.habalam.annotation.MethodScopeData;
 @TestPropertySource(locations = "classpath:jpa-integration-test.properties")
 public abstract class IntegrationTestBase extends AbstractTestNGSpringContextTests {
 
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@PersistenceUnit
 	private EntityManagerFactory entityManagerFactory;
