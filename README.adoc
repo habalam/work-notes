@@ -1,6 +1,17 @@
 = Work notes - notes (not only) for work
 
-Application should work as work/task log for tracking of task, set ups priority of selected ones and
+Application should work as work/task log for tracking of daily tasks, set up priority of selected ones and tracking
+progress.
 
 
-== Progress
+== To be done
+
+* Create/design some basic domain (entity objects) ===== IN PROGRESS
+* Set up build process - crete executable jar
+* Create angular project
+** Create simple GUI for backend (Spring Boot application) ===== IN PROGRESS
+
+=== Features
+* Add multiple "view" options of showing tasks/notes (by day, etc.)
+* Add some user management (registration, login/logout, etc.)
+* Security
