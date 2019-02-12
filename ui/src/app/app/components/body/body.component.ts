@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Task} from "../../classes/task";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'wn-body',
@@ -8,14 +7,8 @@ import {Task} from "../../classes/task";
 })
 export class BodyComponent implements OnInit {
 
-  public tasks: Array<Task> = [];
-
   constructor() { }
 
   ngOnInit() {
-  }
-
-  addTask(task: Task) {
-    this.tasks.push(task);
   }
 }

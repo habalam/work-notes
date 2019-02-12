@@ -1,1 +1,4 @@
-<wn-task *ngFor="let task of tasks" [task]="task"></wn-task>
+<div style="padding: 10px; border: 1px solid cadetblue; display: flow-root" *ngIf="tasks.length > 0">
+  <div style="width: 100%">Tasks list:</div>
+  <wn-task *ngFor="let task of tasks" [task]="task"></wn-task>
+</div>

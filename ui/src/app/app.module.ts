@@ -9,6 +9,7 @@ import { BodyComponent } from './app/components/body/body.component';
 import { NewTaskComponent } from './app/components/new-task/new-task.component';
 import { TasksListComponent } from './app/components/tasks-list/tasks-list.component';
 import { TaskComponent } from './app/components/task/task.component';
+import { TaskViewComponent } from './app/components/task-view/task-view.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TaskComponent } from './app/components/task/task.component';
     BodyComponent,
     NewTaskComponent,
     TasksListComponent,
-    TaskComponent
+    TaskComponent,
+    TaskViewComponent
   ],
   imports: [
     BrowserModule,
