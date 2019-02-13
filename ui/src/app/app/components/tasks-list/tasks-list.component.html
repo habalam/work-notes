@@ -1,4 +1,15 @@
-<div style="padding: 10px; border: 1px solid cadetblue; display: flow-root" *ngIf="tasks.length > 0">
-  <div style="width: 100%">Tasks list:</div>
-  <wn-task *ngFor="let task of tasks" [task]="task"></wn-task>
+<div style="display: flow-root; margin-top: 10px" *ngIf="tasks.length > 0">
+  <div style="width: 100%; margin-bottom: -1px;">
+    <div class="tab-element">
+      Tasks list
+    </div>
+  </div>
+  <div style="padding: 10px; border: 1px solid cadetblue">
+    <div style="float:left; width: 100%;">
+      <div style="float: left; width: 74%; background-image: linear-gradient(to right, rgba(34,209,255,0.7), rgba(34,209,255,0.3));">Text</div>
+      <div style="float: left; width: 13%; background-image: linear-gradient(to right, rgba(34,209,255,0.7), rgba(34,209,255,0.3));">Priority</div>
+      <div style="float: left; width: 13%; background-image: linear-gradient(to right, rgba(34,209,255,0.7), rgba(34,209,255,0.3));">Status</div>
+    </div>
+    <wn-task *ngFor="let task of tasks" [task]="task"></wn-task>
+  </div>
 </div>

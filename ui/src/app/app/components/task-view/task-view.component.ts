@@ -8,7 +8,7 @@ import {Task} from "../../classes/task";
 })
 export class TaskViewComponent implements OnInit {
 
-  public tasks: Array<Task> = [];
+  public tasks: Array<Task> = [new Task("Implementovať Work-notes", "Important", "Opened")];
 
   constructor() { }
 

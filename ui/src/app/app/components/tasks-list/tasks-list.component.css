@@ -1,0 +1,10 @@
+.tab-element {
+  position: relative;
+  z-index: 10;
+  background-color: white;
+  width: 101px;
+  border-top: 1px solid cadetblue;
+  border-left: 1px solid cadetblue;
+  border-right: 1px solid cadetblue;
+  text-align: center;
+}

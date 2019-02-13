@@ -1,0 +1,19 @@
+.task-cell {
+  padding: 5px 0 5px 0;
+  float: left;
+}
+
+.text-cell {
+  width: 74%;
+  background-color: rgb(244, 250, 255);
+}
+
+.priority-cell {
+  width: 13%;
+  background-color: rgb(244, 250, 255)
+}
+
+.status-cell {
+  width: 13%;
+  background-color: rgb(244, 250, 255)
+}
