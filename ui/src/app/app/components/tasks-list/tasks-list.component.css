@@ -1,10 +1,18 @@
-.tab-element {
+.tasks-tab-element {
   position: relative;
   z-index: 10;
-  background-color: white;
+  background-color: rgba(241, 244, 248, 1);
   width: 101px;
-  border-top: 1px solid cadetblue;
-  border-left: 1px solid cadetblue;
-  border-right: 1px solid cadetblue;
+  border-top: 2px solid cornflowerblue;
+  border-left: 2px solid cornflowerblue;
+  border-right: 2px solid cornflowerblue;
+  border-radius: 10px 10px 0 0;
   text-align: center;
+}
+
+.tasks-table {
+  padding: 10px;
+  border: 2px solid cornflowerblue;
+  border-radius: 0 10px 10px 10px;
+  box-shadow: 4px 5px 20px grey;
 }

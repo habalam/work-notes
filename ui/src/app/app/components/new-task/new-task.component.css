@@ -1,4 +1,6 @@
 .new-task-div {
   padding: 10px;
-  border: 1px solid cornflowerblue;
+  border: 2px solid cornflowerblue;
+  border-radius: 20px;
+  box-shadow: 4px 5px 20px grey;
 }

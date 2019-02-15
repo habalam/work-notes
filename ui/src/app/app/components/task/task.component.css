@@ -4,16 +4,16 @@
 }
 
 .text-cell {
-  width: 74%;
+  flex: 1 1 auto;
   background-color: rgb(244, 250, 255);
 }
 
 .priority-cell {
-  width: 13%;
+  width: 100px;
   background-color: rgb(244, 250, 255)
 }
 
 .status-cell {
-  width: 13%;
+  width: 100px;
   background-color: rgb(244, 250, 255)
 }

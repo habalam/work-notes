@@ -15,18 +15,26 @@ export class NewTaskComponent implements OnInit {
 
   @ViewChild('form') public form: NgForm;
 
+  public statuses: Array<string> = ["Opened", "Pending", "Closed"];
+
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.code === "Enter" && this.form.valid) {
-      this.addCard(this.newTask.text, this.newTask.priority, this.newTask.status);
+      this.checkAndAddCard(this.newTask.text, this.newTask.priority, this.newTask.status);
     }
   }
 
-  private addCard(newTaskText: string, newTaskPriority: string, newTaskStatus: string) {
-    this.onAddNewTask.emit(new Task(newTaskText, newTaskPriority, newTaskStatus));
-    this.newTask.text = '';
-    this.newTask.priority = '';
-    this.newTask.status = '';
+  private checkAndAddCard(newTaskText: string, newTaskPriority: string, newTaskStatus: string) {
+    if(this.isFormValid()) {
+      this.onAddNewTask.emit(new Task(newTaskText, newTaskPriority, newTaskStatus));
+      this.newTask.text = '';
+      this.newTask.priority = '';
+      this.newTask.status = '';
+    }
+  }
+
+  private isFormValid() {
+    return this.form.valid;
   }
 
   constructor() {
