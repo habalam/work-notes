@@ -16,6 +16,7 @@ export class NewTaskComponent implements OnInit {
   @ViewChild('form') public form: NgForm;
 
   public statuses: Array<string> = ["Opened", "Pending", "Closed"];
+  public priorities: Array<string> = ["None", "Low", "Medium", "High", "Top"];
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {

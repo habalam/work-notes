@@ -16,3 +16,13 @@
   border-radius: 0 10px 10px 10px;
   box-shadow: 4px 5px 20px grey;
 }
+
+.tasks-column-header {
+  float: left;
+  width: 100px;
+  background-image: linear-gradient(to right, cornflowerblue, rgba(100,149,237,0.3));
+}
+
+.tasks-column-header.textColumn {
+  flex: 1 1 auto;
+}

@@ -6,9 +6,9 @@
   </div>
   <div class="tasks-table">
     <div style="float:left; width: 100%; display: flex;">
-      <div style="float: left; flex: 1 1 auto; background-image: linear-gradient(to right, cornflowerblue, rgba(34,209,255,0.3));">Text</div>
-      <div style="float: left; width: 100px; background-image: linear-gradient(to right, cornflowerblue, rgba(34,209,255,0.3));">Priority</div>
-      <div style="float: left; width: 100px; background-image: linear-gradient(to right, cornflowerblue, rgba(34,209,255,0.3));">Status</div>
+      <div class="tasks-column-header textColumn">Text</div>
+      <div class="tasks-column-header">Priority</div>
+      <div class="tasks-column-header">Status</div>
     </div>
     <wn-task *ngFor="let task of tasks" [task]="task"></wn-task>
   </div>
