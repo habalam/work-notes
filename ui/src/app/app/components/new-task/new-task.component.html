@@ -4,15 +4,17 @@
       <label>Create new task:</label>
     </div>
     <div class="textarea-wrapper">
-      <label class="textarea-label">
-        Task text:
+      <div class="textarea-content">
+        <div class="div1 left">
+          Task text:
+        </div>
         <textarea class="textarea" type="text" placeholder="Add task text..." name="taskText" [(ngModel)]="newTask.text" required>
         </textarea>
-      </label>
+      </div>
     </div>
     <div class="other-parameters">
       <div class="parameter-wrapper">
-        <div class="left">
+        <div class="div1 left">
           Priority:
         </div>
         <select class="new-task-selectbox" name="taskPriority" [(ngModel)]="newTask.priority" required>
@@ -20,7 +22,7 @@
         </select>
       </div>
       <div class="parameter-wrapper">
-        <div class="left">
+        <div class="div1 left">
           Status:
         </div>
         <select class="new-task-selectbox" name="taskStatus" [(ngModel)]="newTask.status" required>
