@@ -17,3 +17,9 @@
   width: 100px;
   background-color: rgb(244, 250, 255)
 }
+
+.task-wrapper {
+  border-bottom: 1px solid cadetblue;
+  display: flex;
+  width: 100%;
+}

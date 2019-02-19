@@ -1,6 +1,53 @@
 .new-task-div {
+  display: flow-root;
   padding: 10px;
   border: 2px solid cornflowerblue;
   border-radius: 20px;
   box-shadow: 4px 5px 20px grey;
+}
+
+.new-task-div .textarea-wrapper {
+  float: left;
+  margin: 5px 0 0 0;
+  display: flex;
+  width: 100%;
+}
+
+.new-task-div .textarea-label {
+  margin: 0 20px 0 20px;
+  float: left;
+  display: flex;
+  flex: 1 1 auto;
+  line-height: 35px;
+}
+
+.new-task-div .textarea {
+  border-radius: 5px;
+  border-color: cornflowerblue;
+  flex: 1 1 auto;
+  margin: 0 0 0 10px;
+  min-height: 35px;
+  resize: vertical;
+}
+
+.new-task-div .other-parameters {
+  float: left;
+  margin: 10px 0 10px 20px;
+}
+
+.parameter-wrapper {
+  margin: 0 10px 0 0;
+  float: left;
+}
+
+select.new-task-selectbox {
+  border-radius: 5px;
+  border-color: cornflowerblue;
+  margin: 0 0 0 10px;
+}
+
+.full-element-row {
+  float: left;
+  width: 100%;
+  margin: 10px 0 0 0;
 }

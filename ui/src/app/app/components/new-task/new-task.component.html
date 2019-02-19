@@ -1,24 +1,35 @@
 <form novalidate #form="ngForm">
-  <div class="new-task-div" style="display: flow-root">
-    <div style="width: 100%">
+  <div class="new-task-div">
+    <div class="full">
       <label>Create new task:</label>
     </div>
-    <div style="margin-top: 5px; float: left;">
-      <label style="margin-left: 20px; width: 30%; float: left; min-width: 200px">
-        Text:
-        <input placeholder="Add task text..." name="taskText" [(ngModel)]="newTask.text" required>
+    <div class="textarea-wrapper">
+      <label class="textarea-label">
+        Task text:
+        <textarea class="textarea" type="text" placeholder="Add task text..." name="taskText" [(ngModel)]="newTask.text" required>
+        </textarea>
       </label>
     </div>
-    <div style="float: left; margin: 5px 0 0 0;">
-      <select name="taskPriority" [(ngModel)]="newTask.priority" required>
-        <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
-      </select>
-      <select name="taskStatus" [(ngModel)]="newTask.status" required>
-        <option *ngFor="let status of statuses" [value]="status">{{status}}</option>
-      </select>
+    <div class="other-parameters">
+      <div class="parameter-wrapper">
+        <div class="left">
+          Priority:
+        </div>
+        <select class="new-task-selectbox" name="taskPriority" [(ngModel)]="newTask.priority" required>
+          <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
+        </select>
+      </div>
+      <div class="parameter-wrapper">
+        <div class="left">
+          Status:
+        </div>
+        <select class="new-task-selectbox" name="taskStatus" [(ngModel)]="newTask.status" required>
+          <option *ngFor="let status of statuses" [value]="status">{{status}}</option>
+        </select>
+      </div>
     </div>
-    <div style="float: left; width: 100%;">
-      <button style="float: right;" (click)="checkAndAddCard(newTask.text, newTask.priority, newTask.status)">Create task</button>
+    <div class="full-element-row">
+      <button (click)="checkAndAddCard(newTask.text, newTask.priority, newTask.status)">Create task</button>
     </div>
   </div>
 </form>
