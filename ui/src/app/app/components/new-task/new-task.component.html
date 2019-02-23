@@ -1,4 +1,4 @@
-<form novalidate #form="ngForm">
+<form #form="ngForm" novalidate>
   <div class="new-task-div">
     <div class="full">
       <label>Create new task:</label>
@@ -17,7 +17,7 @@
         <div class="div1 left">
           Priority:
         </div>
-        <select class="new-task-selectbox" name="taskPriority" [(ngModel)]="newTask.priority" required>
+        <select class="new-task-selectbox" name="taskPriority"  [(ngModel)]="newTask.priority" required>
           <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
         </select>
       </div>
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="full-element-row">
-      <button (click)="checkAndAddCard(newTask.text, newTask.priority, newTask.status)">Create task</button>
+      <button (click)="checkAndAddCard()">Create task</button>
     </div>
   </div>
 </form>

@@ -9,7 +9,7 @@ import {NgForm} from "@angular/forms";
 })
 export class NewTaskComponent implements OnInit {
 
-  public newTask: Task = new Task('', '', '');
+  public newTask: Task = new Task("", "", "");
 
   @Output() onAddNewTask = new EventEmitter<Task>();
 
@@ -20,17 +20,17 @@ export class NewTaskComponent implements OnInit {
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.code === "Enter" && this.form.valid) {
-      this.checkAndAddCard(this.newTask.text, this.newTask.priority, this.newTask.status);
+    if (event.code === "Enter" && this.isFormValid()) {
+      this.checkAndAddCard();
     }
   }
 
-  private checkAndAddCard(newTaskText: string, newTaskPriority: string, newTaskStatus: string) {
+  private checkAndAddCard() {
     if(this.isFormValid()) {
-      this.onAddNewTask.emit(new Task(newTaskText, newTaskPriority, newTaskStatus));
+      this.onAddNewTask.emit(new Task(this.newTask.text, this.newTask.priority, this.newTask.status));
       this.newTask.text = '';
-      this.newTask.priority = '';
-      this.newTask.status = '';
+      this.newTask.priority = this.priorities[0];
+      this.newTask.status = this.statuses[0];
     }
   }
 
@@ -42,5 +42,7 @@ export class NewTaskComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.newTask.priority = this.priorities[0];
+    this.newTask.status = this.statuses[0];
   }
 }
