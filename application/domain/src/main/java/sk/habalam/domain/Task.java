@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import sk.habalam.domain.support.TaskPriority;
-import sk.habalam.domain.support.TaskStatus;
+import sk.habalam.domain.support.TaskState;
 
 @Entity
 @Table(name = "WN_TASK")
@@ -23,7 +23,7 @@ public class Task {
 
 	private String text;
 	private TaskPriority priority;
-	private TaskStatus status;
+	private TaskState state;
 	private LocalDateTime created;
 	private LocalDateTime closed;
 	//TODO pridať nejaku temu, ku ktorej task moze patriť
@@ -85,12 +85,12 @@ public class Task {
 	}
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "TASK_STATUS")
-	public TaskStatus getStatus() {
-		return status;
+	@Column(name = "TASK_STATE")
+	public TaskState getState() {
+		return state;
 	}
 
-	public void setStatus(TaskStatus status) {
-		this.status = status;
+	public void setState(TaskState state) {
+		this.state = state;
 	}
 }

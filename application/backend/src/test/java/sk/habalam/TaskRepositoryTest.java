@@ -14,7 +14,7 @@ import sk.habalam.application.Application;
 import sk.habalam.domain.QTask;
 import sk.habalam.domain.Task;
 import sk.habalam.domain.support.TaskPriority;
-import sk.habalam.domain.support.TaskStatus;
+import sk.habalam.domain.support.TaskState;
 import sk.habalam.respository.TaskRepository;
 
 @MethodScopeData
@@ -27,19 +27,19 @@ public class TaskRepositoryTest extends RepositoryTestBase {
 	@Override
 	protected void prepareData() {
 		dataPreparator.createTask(TaskPriority.NONE, LocalDateTime.parse("2019-02-06T11:44:59"),
-			LocalDateTime.parse("2019-02-06T12:34:39"), TaskStatus.OPENED);
+			LocalDateTime.parse("2019-02-06T12:34:39"), TaskState.OPENED);
 		dataPreparator.createTask(TaskPriority.TOP, LocalDateTime.parse("2019-02-11T12:32:28"),
-			LocalDateTime.parse("2019-02-18T12:32:28"), TaskStatus.OPENED);
+			LocalDateTime.parse("2019-02-18T12:32:28"), TaskState.OPENED);
 		dataPreparator.createTask(TaskPriority.TOP, LocalDateTime.parse("2019-02-12T12:32:28"),
-			LocalDateTime.parse("2019-02-21T12:32:28"), TaskStatus.OPENED);
+			LocalDateTime.parse("2019-02-21T12:32:28"), TaskState.OPENED);
 		dataPreparator.createTask(TaskPriority.TOP, LocalDateTime.parse("2019-02-13T12:32:28"),
-			LocalDateTime.parse("2019-02-20T14:32:28"), TaskStatus.CLOSED);
+			LocalDateTime.parse("2019-02-20T14:32:28"), TaskState.CLOSED);
 		dataPreparator.createTask(TaskPriority.TOP, LocalDateTime.parse("2019-02-14T12:32:28"),
-			LocalDateTime.parse("2019-02-19T12:32:28"), TaskStatus.OPENED);
+			LocalDateTime.parse("2019-02-19T12:32:28"), TaskState.OPENED);
 		dataPreparator.createTask(TaskPriority.TOP, LocalDateTime.parse("2019-02-15T12:32:28"),
-			LocalDateTime.parse("2019-02-22T12:32:28"), TaskStatus.OPENED);
+			LocalDateTime.parse("2019-02-22T12:32:28"), TaskState.OPENED);
 		dataPreparator.createTask(TaskPriority.MEDIUM, LocalDateTime.parse("2019-02-25T08:08:30"),
-			null, TaskStatus.OPENED);
+			null, TaskState.OPENED);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class TaskRepositoryTest extends RepositoryTestBase {
 
 		Task task = tasks.get(0);
 		assertTask(task, "2019-02-06T11:44:59", "2019-02-06T12:34:39",
-			TaskStatus.OPENED, TaskPriority.NONE);
+			TaskState.OPENED, TaskPriority.NONE);
 	}
 
 	@Test
@@ -93,12 +93,12 @@ public class TaskRepositoryTest extends RepositoryTestBase {
 		logger.error("ERROR message");
 	}
 
-	private void assertTask(Task task, String createdDate, String closedDate, TaskStatus taskStatus,
+	private void assertTask(Task task, String createdDate, String closedDate, TaskState taskStatus,
 		TaskPriority taskPriority)
 	{
 		Assertions.assertThat(task.getText()).isEqualTo("Test_text");
 		Assertions.assertThat(task.getPriority()).isEqualByComparingTo(taskPriority);
-		Assertions.assertThat(task.getStatus()).isEqualByComparingTo(taskStatus);
+		Assertions.assertThat(task.getState()).isEqualByComparingTo(taskStatus);
 		Assertions.assertThat(task.getId()).isNotNull();
 		Assertions.assertThat(task.getCreated()).isEqualTo(createdDate);
 		Assertions.assertThat(task.getClosed()).isEqualTo(closedDate);

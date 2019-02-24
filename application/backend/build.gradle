@@ -2,7 +2,7 @@ dependencies {
 	compile project(':application:impl')
 	testCompile project(':application:test')
 
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.1.2.RELEASE'
+	compile 'org.springframework.boot:spring-boot-configuration-processor:2.1.2.RELEASE'
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa:2.1.2.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-web:2.1.2.RELEASE'
 	

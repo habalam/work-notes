@@ -25,8 +25,8 @@
         <div class="div1 left">
           Status:
         </div>
-        <select class="new-task-selectbox" name="taskStatus" [(ngModel)]="newTask.status" required>
-          <option *ngFor="let status of statuses" [value]="status">{{status}}</option>
+        <select class="new-task-selectbox" name="taskState" [(ngModel)]="newTask.state" required>
+          <option *ngFor="let state of states" [value]="state">{{state}}</option>
         </select>
       </div>
     </div>

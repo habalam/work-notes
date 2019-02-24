@@ -1,6 +1,7 @@
 import {Component, EventEmitter, HostListener, OnInit, Output, ViewChild} from '@angular/core';
 import {Task} from "../../classes/task";
 import {NgForm} from "@angular/forms";
+import {TaskService} from "../../classes/task-service";
 
 @Component({
   selector: 'wn-new-task',
@@ -15,8 +16,8 @@ export class NewTaskComponent implements OnInit {
 
   @ViewChild('form') public form: NgForm;
 
-  public statuses: Array<string> = ["Opened", "Pending", "Closed"];
-  public priorities: Array<string> = ["None", "Low", "Medium", "High", "Top"];
+  public states: Array<string> = ["Opened", "Pending", "Closed"];
+  public priorities: Array<string>;
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -26,11 +27,11 @@ export class NewTaskComponent implements OnInit {
   }
 
   private checkAndAddCard() {
-    if(this.isFormValid()) {
-      this.onAddNewTask.emit(new Task(this.newTask.text, this.newTask.priority, this.newTask.status));
+    if (this.isFormValid()) {
+      this.onAddNewTask.emit(new Task(this.newTask.text, this.newTask.priority, this.newTask.state));
       this.newTask.text = '';
       this.newTask.priority = this.priorities[0];
-      this.newTask.status = this.statuses[0];
+      this.newTask.state = this.states[0];
     }
   }
 
@@ -38,11 +39,18 @@ export class NewTaskComponent implements OnInit {
     return this.form.valid;
   }
 
-  constructor() {
-  }
+  constructor(
+    private taskService: TaskService
+  ) {}
 
   ngOnInit() {
-    this.newTask.priority = this.priorities[0];
-    this.newTask.status = this.statuses[0];
+    this.taskService.getPriorities().subscribe((priorities: Array<string>) => {
+      this.priorities = priorities;
+      this.newTask.priority = this.priorities[0];
+    });
+    this.taskService.getStates().subscribe((states: Array<string>) => {
+      this.states = states;
+      this.newTask.state = states[0];
+    });
   }
 }

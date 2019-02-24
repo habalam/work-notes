@@ -2,11 +2,11 @@ export class Task {
 
   text: string;
   priority: string;
-  status: string;
+  state: string;
 
-  constructor(text: string, priority: string, status: string) {
+  constructor(text: string, priority: string, state: string) {
     this.text = text;
     this.priority = priority;
-    this.status = status;
+    this.state = state;
   }
 }

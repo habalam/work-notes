@@ -1,6 +1,6 @@
 package sk.habalam.domain.support;
 
-public enum TaskStatus {
+public enum TaskState {
 	OPENED,
 	PENDING,
 	CLOSED

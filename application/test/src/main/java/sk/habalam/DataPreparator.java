@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import sk.habalam.domain.Task;
 import sk.habalam.domain.support.TaskPriority;
-import sk.habalam.domain.support.TaskStatus;
+import sk.habalam.domain.support.TaskState;
 
 class DataPreparator {
 
@@ -17,11 +17,11 @@ class DataPreparator {
 	}
 
 	public Task createTask(TaskPriority taskPriority, LocalDateTime created, LocalDateTime closed,
-		TaskStatus taskStatus)
+		TaskState taskState)
 	{
 		Task task = new Task();
 		task.setPriority(taskPriority);
-		task.setStatus(taskStatus);
+		task.setState(taskState);
 		task.setText("Test_text");
 		task.setCreated(created);
 		task.setClosed(closed);
