@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,15 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sk.habalam.domain.Task;
 import sk.habalam.respository.TaskRepository;
+import sk.habalam.service.JsonService;
 
 @RestController
 public class TaskRestController extends ControllerSupport {
 
 	private final TaskRepository taskRepository;
+	private final JsonService jsonService;
 
 	@Autowired
-	public TaskRestController(TaskRepository taskRepository) {
+	public TaskRestController(TaskRepository taskRepository, JsonService jsonService) {
 		this.taskRepository = taskRepository;
+		this.jsonService = jsonService;
 	}
 
 	@GetMapping(value = "/taskById/{ID}")
@@ -38,6 +43,12 @@ public class TaskRestController extends ControllerSupport {
 			logger.debug("Date{" + dateString + "} can't be parsed!", e);
 			throw e;
 		}
+	}
+
+	@GetMapping(value = "/task/all")
+	public String getAllTasks() {
+		List<Task> tasks = taskRepository.findAll();
+		return jsonService.writeAsString(tasks);
 	}
 
 	@GetMapping("/loggingTest")

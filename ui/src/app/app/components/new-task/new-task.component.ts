@@ -16,7 +16,7 @@ export class NewTaskComponent implements OnInit {
 
   @ViewChild('form') public form: NgForm;
 
-  public states: Array<string> = ["Opened", "Pending", "Closed"];
+  public states: Array<string>;
   public priorities: Array<string>;
 
   @HostListener('document:keypress', ['$event'])
@@ -44,11 +44,11 @@ export class NewTaskComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.taskService.getPriorities().subscribe((priorities: Array<string>) => {
+    this.taskService.getTaskPriorities().subscribe((priorities: Array<string>) => {
       this.priorities = priorities;
       this.newTask.priority = this.priorities[0];
     });
-    this.taskService.getStates().subscribe((states: Array<string>) => {
+    this.taskService.getTaskStates().subscribe((states: Array<string>) => {
       this.states = states;
       this.newTask.state = states[0];
     });

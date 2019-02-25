@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Task} from "../../classes/task";
+import {TaskService} from "../../classes/task-service";
 
 @Component({
   selector: 'wn-task-view',
@@ -8,11 +9,14 @@ import {Task} from "../../classes/task";
 })
 export class TaskViewComponent implements OnInit {
 
-  public tasks: Array<Task> = [new Task("Implementovať Work-notes", "Important", "Opened")];
+  public tasks: Array<Task>;
 
-  constructor() { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
+    this.taskService.getTasks().subscribe((tasks: Array<Task>) => {
+      this.tasks = tasks;
+    })
   }
 
   addTask(task: Task) {

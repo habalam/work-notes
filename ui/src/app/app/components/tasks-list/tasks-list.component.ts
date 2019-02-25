@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Task} from '../../classes/task';
 
 @Component({
   selector: 'wn-tasks-list',
@@ -7,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class TasksListComponent implements OnInit {
 
-  @Input() tasks: Array<any>;
+  @Input() tasks: Array<Task>;
 
   constructor() { }
 

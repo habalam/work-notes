@@ -6,11 +6,15 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
-  getPriorities() {
+  getTaskPriorities() {
     return this.http.get(`/api/task/priorities`);
   }
 
-  getStates() {
+  getTaskStates() {
     return this.http.get(`/api/task/states`);
+  }
+
+  getTasks() {
+    return this.http.get(`/api/task/all`);
   }
 }
