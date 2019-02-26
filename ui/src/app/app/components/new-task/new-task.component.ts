@@ -28,7 +28,8 @@ export class NewTaskComponent implements OnInit {
 
   private checkAndAddCard() {
     if (this.isFormValid()) {
-      this.onAddNewTask.emit(new Task(this.newTask.text, this.newTask.priority, this.newTask.state));
+      this.taskService.addTask(new Task(this.newTask.text, this.newTask.priority, this.newTask.state))
+        .subscribe(response => console.log(response), error => console.log(error), () => this.onAddNewTask.emit());
       this.newTask.text = '';
       this.newTask.priority = this.priorities[0];
       this.newTask.state = this.states[0];

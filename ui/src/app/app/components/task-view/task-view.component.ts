@@ -19,7 +19,9 @@ export class TaskViewComponent implements OnInit {
     })
   }
 
-  addTask(task: Task) {
-    this.tasks.push(task);
+  refreshTasks() {
+    this.taskService.getTasks().subscribe((tasks: Array<Task>) => {
+      this.tasks = tasks;
+    });
   }
 }

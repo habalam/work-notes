@@ -16,4 +16,6 @@ public interface TaskRepository {
 	List<Task> findAll();
 
 	List<Task> findByDate(LocalDate date);
+
+	void addTask(Task task);
 }
