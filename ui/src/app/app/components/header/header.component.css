@@ -24,3 +24,16 @@
   background-color: white;
   border: 2px solid cornflowerblue;
 }
+
+.header-title {
+  background-color: white;
+  margin: 9px 0 0 -2px;
+  line-height: 50px;
+  font-size: 30px;
+  padding: 0 10px 0 3px;
+  color: cornflowerblue;
+}
+
+.header-title-background {
+  background-color: cornflowerblue;
+}

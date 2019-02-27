@@ -1,37 +1,40 @@
 <form #form="ngForm" novalidate>
-  <div class="new-task-div">
-    <div class="full">
-      <label>Create new task:</label>
-    </div>
-    <div class="textarea-wrapper">
-      <div class="textarea-content">
-        <div class="div1 left">
-          Task text:
-        </div>
-        <textarea class="textarea" type="text" placeholder="Add task text..." name="taskText" [(ngModel)]="newTask.text" required>
-        </textarea>
+  <div class="action_button">
+    <div class="new-task-div">
+      <div class="new-task-title">
+        <label>Create new task</label>
       </div>
-    </div>
-    <div class="other-parameters">
-      <div class="parameter-wrapper">
-        <div class="div1 left">
-          Priority:
+      <img src="assets/img/arrow-gray-icon.png" alt="arrow-gray" class="transition-arrow">
+      <div class="textarea-wrapper">
+        <div class="textarea-content">
+          <div class="div1 left">
+            Task text:
+          </div>
+          <textarea class="textarea" type="text" placeholder="Add task text..." name="taskText" [(ngModel)]="newTask.text" required>
+          </textarea>
         </div>
-        <select class="new-task-selectbox" name="taskPriority"  [(ngModel)]="newTask.priority" required>
-          <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
-        </select>
       </div>
-      <div class="parameter-wrapper">
-        <div class="div1 left">
-          Status:
+      <div class="other-parameters">
+        <div class="parameter-wrapper">
+          <div class="div1 left">
+            Priority:
+          </div>
+          <select class="new-task-selectbox" name="taskPriority" [(ngModel)]="newTask.priority" required>
+            <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
+          </select>
         </div>
-        <select class="new-task-selectbox" name="taskState" [(ngModel)]="newTask.state" required>
-          <option *ngFor="let state of states" [value]="state">{{state}}</option>
-        </select>
+        <div class="parameter-wrapper">
+          <div class="div1 left">
+            Status:
+          </div>
+          <select class="new-task-selectbox" name="taskState" [(ngModel)]="newTask.state" required>
+            <option *ngFor="let state of states" [value]="state">{{state}}</option>
+          </select>
+        </div>
       </div>
-    </div>
-    <div class="full-element-row">
-      <button (click)="checkAndAddCard()">Create task</button>
+      <div class="full-element-row">
+        <button (click)="checkAndAddCard()">Create task</button>
+      </div>
     </div>
   </div>
 </form>

@@ -6,3 +6,19 @@
   padding: 5px 0 5px 0;
   border-top: 2px solid cornflowerblue;
 }
+
+.github-icon {
+  height: 32px;
+  margin: 0 0 0 8px;
+}
+
+.github-link {
+  line-height: 32px;
+  margin: 0 0 0 5px;
+}
+
+.powered-by {
+  float: right;
+  line-height: 32px;
+  margin: 0 8px 0 0;
+}

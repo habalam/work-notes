@@ -28,6 +28,7 @@ export class NewTaskComponent implements OnInit {
 
   private checkAndAddCard() {
     if (this.isFormValid()) {
+      //TODO do konzoly loguje null, fixnúť
       this.taskService.addTask(new Task(this.newTask.text, this.newTask.priority, this.newTask.state))
         .subscribe(response => console.log(response), error => console.log(error), () => this.onAddNewTask.emit());
       this.newTask.text = '';

@@ -4,6 +4,10 @@
   border: 2px solid cornflowerblue;
   border-radius: 20px;
   box-shadow: 4px 5px 20px grey;
+  transition: max-height 1.5s;
+  max-height: 0;
+  min-height: 20px;
+  overflow: hidden;
 }
 
 .new-task-div .textarea-wrapper {
@@ -28,6 +32,7 @@
   margin: 0 0 0 10px;
   min-height: 35px;
   resize: vertical;
+  max-height: 400px;
 }
 
 .new-task-div .other-parameters {
@@ -56,4 +61,23 @@ select.new-task-selectbox {
   width: 100%;
   display: flex;
   margin: 0 0 0 20px
+}
+
+.action_button:hover > .new-task-div  {
+  max-height: 500px;
+}
+
+.action_button:hover > .new-task-div > .transition-arrow {
+  transform: rotate(180deg);
+}
+
+.transition-arrow {
+  float: right;
+  margin: 2px 5px 0 0;
+  transition: transform 2.5s;
+}
+
+.new-task-title {
+  padding: 0 0 10px 0;
+  float: left;
 }
