@@ -18,8 +18,33 @@
   background-color: rgb(244, 250, 255)
 }
 
-.task-wrapper {
+.task-data {
   border-bottom: 1px solid cadetblue;
   display: flex;
   width: 100%;
+  box-sizing: border-box;
+}
+
+.task-wrapper:hover > .task-change {
+  display: block;
+}
+
+.task-wrapper:hover > .task-data {
+  border-left: 1px solid cadetblue;
+  border-right: 1px solid cadetblue;
+  border-bottom: 0;
+}
+
+.task-change {
+  display: none;
+  float: left;
+  width: 100%;
+  background-color: rgb(244, 250, 255);
+  padding: 5px 10px 5px 10px;
+  box-sizing: border-box;
+  border-left: 1px solid cadetblue;
+  border-right: 1px solid cadetblue;
+  border-bottom: 1px solid cadetblue;
+  border-radius: 0 0 10px 30px;
+  margin: 0 0 5px 0;
 }

@@ -10,12 +10,14 @@ import {TaskService} from "../../classes/task-service";
 export class TaskViewComponent implements OnInit {
 
   public tasks: Array<Task>;
+  public tasksCount: number;
 
   constructor(private taskService: TaskService) { }
 
   ngOnInit() {
     this.taskService.getTasks().subscribe((tasks: Array<Task>) => {
       this.tasks = tasks;
+      this.tasksCount = tasks.length;
     })
   }
 

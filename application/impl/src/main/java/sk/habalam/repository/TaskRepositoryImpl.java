@@ -40,4 +40,12 @@ public class TaskRepositoryImpl extends RepositoryBase implements TaskRepository
 		task.setCreated(LocalDateTime.now());
 		entityManager.persist(task);
 	}
+
+	@Override
+	@Transactional
+	public void deleteTask(Integer taskId) {
+		jpaQueryFactory.delete(QTask.task).where(QTask.task.id.eq(taskId)).execute();
+		//TODO vyskúmať ako toto funguje a či je to potrebné/škodlivé
+		entityManager.flush();
+	}
 }

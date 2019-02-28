@@ -28,4 +28,13 @@ export class TaskService {
     };
     return this.http.post(`/api/task/add`, JSON.stringify(task), httpOptions);
   }
+
+  deleteTask(id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post(`/api/task/delete`, JSON.stringify(id), httpOptions);
+  }
 }

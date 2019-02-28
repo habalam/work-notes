@@ -1,2 +1,3 @@
 <wn-new-task (onAddNewTask)="refreshTasks()"></wn-new-task>
-<wn-tasks-list [tasks]="tasks"></wn-tasks-list>
+<!--TODO toto by sa dalo určite vyriešiť lepšie - nie napĺňať tasksCount... možno s použitím "async"?-->
+<wn-tasks-list *ngIf="tasksCount > 0" [tasks]="tasks"></wn-tasks-list>
