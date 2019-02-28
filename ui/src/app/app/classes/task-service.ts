@@ -1,9 +1,14 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Task} from "./task";
+import {Subject} from "rxjs";
 
 @Injectable()
 export class TaskService {
+
+  private tasks = new Subject<Array<Task>>();
+
+  observableTasks = this.tasks.asObservable();
 
   constructor(private http: HttpClient) {
   }
@@ -26,7 +31,12 @@ export class TaskService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post(`/api/task/add`, JSON.stringify(task), httpOptions);
+    this.http.post(`/api/task/add`, JSON.stringify(task), httpOptions)
+      .subscribe(response => console.log(response), error => console.log(error), () => {
+        this.getTasks().subscribe((tasks: Array<Task>) => {
+          this.tasks.next(tasks);
+        })
+      });
   }
 
   deleteTask(id: number) {
@@ -35,6 +45,11 @@ export class TaskService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post(`/api/task/delete`, JSON.stringify(id), httpOptions);
+    this.http.post(`/api/task/delete`, JSON.stringify(id), httpOptions)
+      .subscribe(response => console.log(response), error => console.log(error), () => {
+      this.getTasks().subscribe((tasks: Array<Task>) => {
+        this.tasks.next(tasks);
+      })
+    });
   }
 }

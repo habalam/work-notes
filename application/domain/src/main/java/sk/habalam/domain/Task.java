@@ -93,4 +93,16 @@ public class Task {
 	public void setState(TaskState state) {
 		this.state = state;
 	}
+
+	@Override
+	public String toString() {
+		return "Task{" +
+			"id=" + id + ", " +
+			"text='" + text + ", " +
+			"priority=" + priority.name() + ", " +
+			"state=" + state.name() + ", " +
+			"created=" + created.toString() + ", " +
+			"closed=" + closed.toString() +
+			'}';
+	}
 }

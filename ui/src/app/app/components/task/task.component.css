@@ -25,26 +25,37 @@
   box-sizing: border-box;
 }
 
-.task-wrapper:hover > .task-change {
+.task-wrapper:hover > .task-change-wrapper {
   display: block;
 }
 
 .task-wrapper:hover > .task-data {
   border-left: 1px solid cadetblue;
   border-right: 1px solid cadetblue;
+  box-shadow: 2px 3px 3px grey;
   border-bottom: 0;
 }
 
-.task-change {
+.task-change-wrapper {
   display: none;
   float: left;
   width: 100%;
   background-color: rgb(244, 250, 255);
-  padding: 5px 10px 5px 10px;
+  padding: 5px 20px 5px 20px;
   box-sizing: border-box;
   border-left: 1px solid cadetblue;
   border-right: 1px solid cadetblue;
   border-bottom: 1px solid cadetblue;
   border-radius: 0 0 10px 30px;
   margin: 0 0 5px 0;
+  box-shadow: 2px 3px 3px grey;
+}
+
+.task-change {
+  padding: 5px 0 0 0;
+  border-top: 1px solid cadetblue;
+}
+
+.cell-content {
+  padding: 0 0 0 10px;
 }

@@ -2,23 +2,25 @@
   <div class="task-wrapper">
     <div class="task-data">
       <div class="task-cell text-cell">
-        <div>
+        <div class="cell-content">
           {{task.text}}
         </div>
       </div>
-      <div class="task-cell priority-cell test">
-        <div>
+      <div class="task-cell priority-cell">
+        <div class="cell-content">
           {{task.priority}}
         </div>
       </div>
-      <div class="task-cell status-cell test">
-        <div>
+      <div class="task-cell status-cell">
+        <div class="cell-content">
           {{task.state}}
         </div>
       </div>
     </div>
-    <div class="task-change">
-      <button (click)="deleteTask()">Delete task</button>
+    <div class="task-change-wrapper">
+      <div class="task-change">
+        <button (click)="deleteTask()">Delete task</button>
+      </div>
     </div>
   </div>
 </form>

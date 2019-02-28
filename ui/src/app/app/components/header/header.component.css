@@ -17,6 +17,7 @@
   float: left;
   padding: 15px 0 15px 0;
   display: flex;
+  color: darkslategray;
 }
 
 .header-image {
@@ -31,7 +32,6 @@
   line-height: 50px;
   font-size: 30px;
   padding: 0 10px 0 3px;
-  color: cornflowerblue;
 }
 
 .header-title-background {

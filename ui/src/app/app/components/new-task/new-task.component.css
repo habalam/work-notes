@@ -8,6 +8,7 @@
   max-height: 0;
   min-height: 20px;
   overflow: hidden;
+  color: darkslategray;
 }
 
 .new-task-div .textarea-wrapper {
@@ -63,11 +64,11 @@ select.new-task-selectbox {
   margin: 0 0 0 20px
 }
 
-.action_button:hover > .new-task-div  {
+.new-task-wrapper:hover > .new-task-div  {
   max-height: 500px;
 }
 
-.action_button:hover > .new-task-div > .transition-arrow {
+.new-task-wrapper:hover > .new-task-div > .transition-arrow {
   transform: rotate(180deg);
 }
 

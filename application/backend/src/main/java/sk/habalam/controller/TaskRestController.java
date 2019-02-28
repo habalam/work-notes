@@ -54,6 +54,7 @@ public class TaskRestController extends ControllerSupport {
 	@PostMapping(value = "/task/add")
 	public void addTask(@RequestBody Task task) {
 		taskRepository.addTask(task);
+		logger.info(task.toString());
 //		return "test";
 	}
 

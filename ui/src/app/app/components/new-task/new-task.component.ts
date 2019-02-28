@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Task} from "../../classes/task";
 import {NgForm} from "@angular/forms";
 import {TaskService} from "../../classes/task-service";
@@ -11,8 +11,6 @@ import {TaskService} from "../../classes/task-service";
 export class NewTaskComponent implements OnInit {
 
   public newTask: Task = new Task("", "", "");
-
-  @Output() onAddNewTask = new EventEmitter<Task>();
 
   @ViewChild('form') public form: NgForm;
 
@@ -29,8 +27,7 @@ export class NewTaskComponent implements OnInit {
   private checkAndAddCard() {
     if (this.isFormValid()) {
       //TODO do konzoly loguje null, fixnúť
-      this.taskService.addTask(new Task(this.newTask.text, this.newTask.priority, this.newTask.state))
-        .subscribe(response => console.log(response), error => console.log(error), () => this.onAddNewTask.emit());
+      this.taskService.addTask(new Task(this.newTask.text, this.newTask.priority, this.newTask.state));
       this.newTask.text = '';
       this.newTask.priority = this.priorities[0];
       this.newTask.state = this.states[0];

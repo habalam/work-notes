@@ -12,18 +12,17 @@ export class TaskViewComponent implements OnInit {
   public tasks: Array<Task>;
   public tasksCount: number;
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService) {
+    this.taskService.observableTasks.subscribe((tasks: Array<Task>) => {
+      this.tasks = tasks;
+      this.tasksCount = tasks.length;
+    });
+  }
 
   ngOnInit() {
     this.taskService.getTasks().subscribe((tasks: Array<Task>) => {
       this.tasks = tasks;
       this.tasksCount = tasks.length;
     })
-  }
-
-  refreshTasks() {
-    this.taskService.getTasks().subscribe((tasks: Array<Task>) => {
-      this.tasks = tasks;
-    });
   }
 }

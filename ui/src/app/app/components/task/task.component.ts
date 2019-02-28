@@ -20,8 +20,6 @@ export class TaskComponent implements OnInit {
   }
 
   deleteTask() {
-    this.taskServide.deleteTask(this.task.id).subscribe(response => console.log(response), error => console.log(error), () => {
-      console.log(this.task.id, this.task.text, this.task.priority, this.task.state);
-    });
+    this.taskServide.deleteTask(this.task.id);
   }
 }
