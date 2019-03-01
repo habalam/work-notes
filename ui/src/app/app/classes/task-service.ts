@@ -7,24 +7,33 @@ import {Subject} from "rxjs";
 export class TaskService {
 
   private tasks = new Subject<Array<Task>>();
+  private priorities = new Subject<Array<String>>();
+  private states = new Subject<Array<String>>();
 
   observableTasks = this.tasks.asObservable();
+  observablePriorities = this.priorities.asObservable();
+  observableStates = this.states.asObservable();
 
   constructor(private http: HttpClient) {
   }
 
   getTaskPriorities() {
-    return this.http.get(`/api/task/priorities`);
+    return this.http.get(`/api/task/priorities`).subscribe((priorities: Array<string>) => {
+      this.priorities.next(priorities);
+    });
   }
 
   getTaskStates() {
-    return this.http.get(`/api/task/states`);
+    return this.http.get(`/api/task/states`).subscribe((states: Array<string>) => {
+      this.states.next(states);
+    });
   }
 
   getTasks() {
     return this.http.get(`/api/task/all`);
   }
 
+  //TODO do konzoly loguje null, fixnúť
   addTask(task: Task) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -39,6 +48,7 @@ export class TaskService {
       });
   }
 
+  //TODO do konzoly loguje null, fixnúť
   deleteTask(id: number) {
     const httpOptions = {
       headers: new HttpHeaders({

@@ -26,7 +26,6 @@ export class NewTaskComponent implements OnInit {
 
   private checkAndAddCard() {
     if (this.isFormValid()) {
-      //TODO do konzoly loguje null, fixnúť
       this.taskService.addTask(new Task(this.newTask.text, this.newTask.priority, this.newTask.state));
       this.newTask.text = '';
       this.newTask.priority = this.priorities[0];
@@ -40,16 +39,17 @@ export class NewTaskComponent implements OnInit {
 
   constructor(
     private taskService: TaskService
-  ) {}
-
-  ngOnInit() {
-    this.taskService.getTaskPriorities().subscribe((priorities: Array<string>) => {
+  ) {
+    this.taskService.observablePriorities.subscribe((priorities: Array<string>) => {
       this.priorities = priorities;
-      this.newTask.priority = this.priorities[0];
+      this.newTask.priority = priorities[0];
     });
-    this.taskService.getTaskStates().subscribe((states: Array<string>) => {
+    this.taskService.observableStates.subscribe((states: Array<string>) => {
       this.states = states;
       this.newTask.state = states[0];
-    });
+    })
+  }
+
+  ngOnInit() {
   }
 }

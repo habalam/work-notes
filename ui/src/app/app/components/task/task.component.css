@@ -5,17 +5,14 @@
 
 .text-cell {
   flex: 1 1 auto;
-  background-color: rgb(244, 250, 255);
 }
 
 .priority-cell {
   width: 100px;
-  background-color: rgb(244, 250, 255)
 }
 
 .status-cell {
   width: 100px;
-  background-color: rgb(244, 250, 255)
 }
 
 .task-data {
@@ -23,6 +20,7 @@
   display: flex;
   width: 100%;
   box-sizing: border-box;
+  background-color: rgb(244, 250, 255)
 }
 
 .task-wrapper:hover > .task-change-wrapper {
@@ -34,14 +32,15 @@
   border-right: 1px solid cadetblue;
   box-shadow: 2px 3px 3px grey;
   border-bottom: 0;
+  background-color: rgb(225, 240, 255);
 }
 
 .task-change-wrapper {
   display: none;
   float: left;
   width: 100%;
-  background-color: rgb(244, 250, 255);
-  padding: 5px 20px 5px 20px;
+  background-color: rgb(225, 240, 255);
+  padding: 0 20px 5px 20px;
   box-sizing: border-box;
   border-left: 1px solid cadetblue;
   border-right: 1px solid cadetblue;
@@ -58,4 +57,21 @@
 
 .cell-content {
   padding: 0 0 0 10px;
+}
+
+.task-change .task-change-text {
+  width: 100%;
+  float: left;
+  display: flex;
+  margin: 0 0 10px 0;
+}
+
+.task-change .textarea {
+  width: 100%;
+  border-radius: 5px;
+  border-color: cornflowerblue;
+  margin: 0 0 0 10px;
+  min-height: 35px;
+  resize: vertical;
+  max-height: 400px;
 }

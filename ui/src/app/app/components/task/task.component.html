@@ -19,6 +19,18 @@
     </div>
     <div class="task-change-wrapper">
       <div class="task-change">
+        <div class="task-change-text">
+          <div class="div1 left">
+            Task text:
+          </div>
+          <textarea class="textarea" type="text" placeholder="Add task text..." name="taskText" [(ngModel)]="task.text" required></textarea>
+        </div>
+        <select class="new-task-selectbox" name="taskPriority" [(ngModel)]="task.priority" required>
+          <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
+        </select>
+        <select class="new-task-selectbox" name="taskState" [(ngModel)]="task.state" required>
+          <option *ngFor="let state of states" [value]="state">{{state}}</option>
+        </select>
         <button (click)="deleteTask()">Delete task</button>
       </div>
     </div>

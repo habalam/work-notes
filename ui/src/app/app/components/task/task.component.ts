@@ -14,12 +14,24 @@ export class TaskComponent implements OnInit {
 
   @Input() task: Task;
 
-  constructor(private taskServide: TaskService) { }
+  public priorities: Array<string>;
+  public states: Array<string>;
+
+  constructor(private taskService: TaskService) {
+    this.taskService.observablePriorities.subscribe((priorities: Array<string>) => {
+      this.priorities = priorities;
+    });
+    this.taskService.observableStates.subscribe((states: Array<string>) => {
+      this.states = states;
+    });
+  }
 
   ngOnInit() {
+    this.taskService.getTaskPriorities();
+    this.taskService.getTaskStates();
   }
 
   deleteTask() {
-    this.taskServide.deleteTask(this.task.id);
+    this.taskService.deleteTask(this.task.id);
   }
 }
