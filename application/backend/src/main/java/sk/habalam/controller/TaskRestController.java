@@ -30,7 +30,7 @@ public class TaskRestController extends ControllerSupport {
 	@GetMapping(value = "/taskById/{ID}")
 	public String getTaskById(@PathVariable("ID") Integer noteId) {
 		Task task = taskRepository.findById(noteId);
-		return task.getId().toString();
+		return jsonService.writeAsString(task);
 	}
 
 	@GetMapping(value = "/tasksByDay")
@@ -52,31 +52,24 @@ public class TaskRestController extends ControllerSupport {
 	}
 
 	@PostMapping(value = "/task/add")
-	public void addTask(@RequestBody Task task) {
+	public String addTask(@RequestBody Task task) {
 		taskRepository.addTask(task);
 		logger.info(task.toString());
-//		return "test";
+		return OK_RESPONSE_CODE;
 	}
 
 	@PostMapping(value = "/task/update")
-	public void updateTask(@RequestBody Task task) {
+	public String updateTask(@RequestBody Task task) {
+		taskRepository.updateTask(task);
 		logger.info(task.toString());
+		return OK_RESPONSE_CODE;
 	}
 
 	//TODO nejak vyriešiť navratove hodnoty a samozrejme logovanie
 	@PostMapping(value = "/task/delete")
-	public void deleteTaskById(@RequestBody Integer taskId) {
+	public String deleteTaskById(@RequestBody Integer taskId) {
 		taskRepository.deleteTask(taskId);
 		logger.info("Task{id=" + taskId + "} deleted");
-	}
-
-	@GetMapping("/loggingTest")
-	public String loggingTest() {
-		logger.trace("TRACE message");
-		logger.debug("DEBUG message");
-		logger.info("INFO message");
-		logger.warn("WARN message");
-		logger.error("ERROR message");
-		return "Logger checked!";
+		return OK_RESPONSE_CODE;
 	}
 }

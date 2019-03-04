@@ -48,4 +48,15 @@ public class TaskRepositoryImpl extends RepositoryBase implements TaskRepository
 		//TODO vyskúmať ako toto funguje a či je to potrebné/škodlivé
 		entityManager.flush();
 	}
+
+	@Override
+	@Transactional
+	public void updateTask(Task task) {
+		QTask qTask = QTask.task;
+		jpaQueryFactory.update(qTask).where(qTask.id.eq(task.getId()))
+			.set(qTask.text, task.getText())
+			.set(qTask.priority, task.getPriority())
+			.set(qTask.state, task.getState())
+			.execute();
+	}
 }

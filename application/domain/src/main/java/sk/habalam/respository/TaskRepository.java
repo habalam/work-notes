@@ -9,16 +9,25 @@ import sk.habalam.domain.Task;
  * Repository for getting informations about {@link Task}. It is not only simple CRUD operations, but
  * also "domain" logic
  * */
-//TODO dopísať javadoc
 public interface TaskRepository {
 
+	/** Return unique {@link Task} by id */
 	Task findById(int id);
 
+	/** Return all {@link Task}'s */
 	List<Task> findAll();
 
+	/** Return all {@link Task}'s for selected day - all tasks created this day or later and which
+	 * are opened this day or closed this day or later*/
 	List<Task> findByDate(LocalDate date);
 
+	/** Add new {@link Task} to DB*/
 	void addTask(Task task);
 
+	/** Delete {@link Task} from DB identified by ID */
 	void deleteTask(Integer taskId);
+
+	/** Update {@link Task} in DB identified by ID (took from Task in method parameter) with data
+	 * from parameter */
+	void updateTask(Task task);
 }

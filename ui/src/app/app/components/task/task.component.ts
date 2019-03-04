@@ -28,13 +28,6 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    if ((this.states == null || this.priorities.length == null) && this.taskService.enumsInitialized()) {
-      this.taskService.resendEnums();
-    }
-    this.currentTask = new Task(this.task.text, this.task.priority, this.task.state);
-  }
-
   deleteTask() {
     this.taskService.deleteTask(this.task.id);
   }
@@ -50,5 +43,12 @@ export class TaskComponent implements OnInit {
 
       this.taskService.updateTask(this.task);
     }
+  }
+
+  ngOnInit() {
+    if ((this.states == null || this.priorities.length == null) && this.taskService.enumsInitialized()) {
+      this.taskService.resendEnums();
+    }
+    this.currentTask = new Task(this.task.text, this.task.priority, this.task.state);
   }
 }

@@ -20,7 +20,7 @@ export class NewTaskComponent implements OnInit {
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.code === "Enter" && this.isFormValid()) {
-      this.checkAndAddCard();
+      this.checkAndAddTask();
     }
   }
 
@@ -37,7 +37,7 @@ export class NewTaskComponent implements OnInit {
     })
   }
 
-  private checkAndAddCard() {
+  private checkAndAddTask() {
     if (this.isFormValid()) {
       this.taskService.addTask(new Task(this.newTask.text, this.newTask.priority, this.newTask.state));
       this.newTask.text = '';
@@ -51,7 +51,7 @@ export class NewTaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    if((this.states == null || this.priorities.length == null) && this.taskService.enumsInitialized()) {
+    if((this.states == null || this.priorities == null) && this.taskService.enumsInitialized()) {
       this.taskService.resendEnums();
     }
   }
