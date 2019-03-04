@@ -101,8 +101,8 @@ public class Task {
 			"text='" + text + ", " +
 			"priority=" + priority.name() + ", " +
 			"state=" + state.name() + ", " +
-			"created=" + created.toString() + ", " +
-			"closed=" + closed.toString() +
+//			"created=" + created.toString() + ", " +
+//			"closed=" + closed.toString() +
 			'}';
 	}
 }

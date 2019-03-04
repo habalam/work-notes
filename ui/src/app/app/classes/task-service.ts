@@ -6,31 +6,71 @@ import {Subject} from "rxjs";
 @Injectable()
 export class TaskService {
 
+  //TODO oddelit service na inicializaciu Enumov (Priorities, States) samostatne
   private tasks = new Subject<Array<Task>>();
-  private priorities = new Subject<Array<String>>();
-  private states = new Subject<Array<String>>();
+  private priorities = new Subject<Array<string>>();
+  private states = new Subject<Array<string>>();
+
+  private storedPriorities = new Array<string>();
+  private storedStates = new Array<string>();
 
   observableTasks = this.tasks.asObservable();
   observablePriorities = this.priorities.asObservable();
   observableStates = this.states.asObservable();
 
+  private prioritiesInitialized = false;
+  private statesInitialized = false;
+
   constructor(private http: HttpClient) {
+    this.initializeEnums();
   }
 
+  private initializeEnums() {
+    this.prioritiesInitialized = false;
+    this.statesInitialized = false;
+    this.getTaskPriorities();
+    this.getTaskStates();
+  }
+
+  enumsInitialized(): boolean {
+    return this.prioritiesInitialized && this.statesInitialized;
+  }
+
+  //TODO stále nemám vyladené - bijú sa mi koncepty Observable a single inicializácia pri spustení/refresh -
+  // problém je v tom, že ak by som sa spoľahol iba na Observable implementáciu, tak push operácia (.next)
+  // sa môže spustiť ešte predtým ako budú všetci subscribnutý (tj. pre daný Observer bude pole prázdne)
+  // ale ak zas použijem statické pole, to tiež nemusí byť v okamihu keď ho budem potrebovať naplnené (a
+  // už nemám šancu túto info pushnúť na prešírenie)... problém vyplýva z toho, že v Angulare sa všetky
+  // componenty inicializujú súčasne a zároveň call-y na backend sú realizované asynchrónne
   getTaskPriorities() {
     return this.http.get(`/api/task/priorities`).subscribe((priorities: Array<string>) => {
-      this.priorities.next(priorities);
+      this.storedPriorities = priorities;
+      this.priorities.next(this.storedPriorities);
+      this.prioritiesInitialized = true;
     });
   }
 
   getTaskStates() {
     return this.http.get(`/api/task/states`).subscribe((states: Array<string>) => {
-      this.states.next(states);
+      this.storedStates = states;
+      this.states.next(this.storedStates);
+      this.statesInitialized = true;
     });
+  }
+
+  resendEnums() {
+    this.priorities.next(this.storedPriorities);
+    this.states.next(this.storedStates);
   }
 
   getTasks() {
     return this.http.get(`/api/task/all`);
+  }
+
+  refreshTasks() {
+    this.getTasks().subscribe((tasks: Array<Task>) => {
+      this.tasks.next(tasks);
+    });
   }
 
   //TODO do konzoly loguje null, fixnúť
@@ -42,9 +82,7 @@ export class TaskService {
     };
     this.http.post(`/api/task/add`, JSON.stringify(task), httpOptions)
       .subscribe(response => console.log(response), error => console.log(error), () => {
-        this.getTasks().subscribe((tasks: Array<Task>) => {
-          this.tasks.next(tasks);
-        })
+        this.refreshTasks();
       });
   }
 
@@ -57,9 +95,17 @@ export class TaskService {
     };
     this.http.post(`/api/task/delete`, JSON.stringify(id), httpOptions)
       .subscribe(response => console.log(response), error => console.log(error), () => {
-      this.getTasks().subscribe((tasks: Array<Task>) => {
-        this.tasks.next(tasks);
+        this.refreshTasks();
+      });
+  }
+
+  updateTask(task: Task) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
       })
-    });
+    };
+    this.http.post(`/api/task/update`, JSON.stringify(task), httpOptions)
+      .subscribe(response => console.log(response), error => console.log(error));
   }
 }

@@ -58,6 +58,11 @@ public class TaskRestController extends ControllerSupport {
 //		return "test";
 	}
 
+	@PostMapping(value = "/task/update")
+	public void updateTask(@RequestBody Task task) {
+		logger.info(task.toString());
+	}
+
 	//TODO nejak vyriešiť navratove hodnoty a samozrejme logovanie
 	@PostMapping(value = "/task/delete")
 	public void deleteTaskById(@RequestBody Integer taskId) {

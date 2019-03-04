@@ -20,11 +20,6 @@ export class TaskViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe((tasks: Array<Task>) => {
-      this.tasks = tasks;
-      this.tasksCount = tasks.length;
-    });
-    this.taskService.getTaskPriorities();
-    this.taskService.getTaskStates();
+    this.taskService.refreshTasks();
   }
 }

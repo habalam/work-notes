@@ -1,5 +1,5 @@
 <form #form="ngForm" novalidate>
-  <div class="task-wrapper">
+  <div class="task-wrapper" (mouseleave)="updateIfNeeded()">
     <div class="task-data">
       <div class="task-cell text-cell">
         <div class="cell-content">
@@ -23,12 +23,12 @@
           <div class="div1 left">
             Task text:
           </div>
-          <textarea class="textarea" type="text" placeholder="Add task text..." name="taskText" [(ngModel)]="task.text" required></textarea>
+          <textarea class="textarea" type="text" placeholder="Add task text..." name="taskText" [(ngModel)]="currentTask.text" required></textarea>
         </div>
-        <select class="new-task-selectbox" name="taskPriority" [(ngModel)]="task.priority" required>
+        <select class="new-task-selectbox" name="taskPriority" [(ngModel)]="currentTask.priority" required>
           <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
         </select>
-        <select class="new-task-selectbox" name="taskState" [(ngModel)]="task.state" required>
+        <select class="new-task-selectbox" name="taskState" [(ngModel)]="currentTask.state" required>
           <option *ngFor="let state of states" [value]="state">{{state}}</option>
         </select>
         <button (click)="deleteTask()">Delete task</button>

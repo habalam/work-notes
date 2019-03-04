@@ -14,8 +14,10 @@ export class TaskComponent implements OnInit {
 
   @Input() task: Task;
 
-  public priorities: Array<string>;
-  public states: Array<string>;
+  private currentTask: Task;
+
+  private priorities: Array<string>;
+  private states: Array<string>;
 
   constructor(private taskService: TaskService) {
     this.taskService.observablePriorities.subscribe((priorities: Array<string>) => {
@@ -27,11 +29,26 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.taskService.getTaskPriorities();
-    this.taskService.getTaskStates();
+    if ((this.states == null || this.priorities.length == null) && this.taskService.enumsInitialized()) {
+      this.taskService.resendEnums();
+    }
+    this.currentTask = new Task(this.task.text, this.task.priority, this.task.state);
   }
 
   deleteTask() {
     this.taskService.deleteTask(this.task.id);
+  }
+
+  updateIfNeeded() {
+    if (this.task.text != this.currentTask.text || this.task.priority != this.currentTask.priority ||
+      this.task.state != this.currentTask.state)
+    {
+      //TODO na GUI by sa mali info zmeniť až po tom, ako update úspešne dobehne update na backend-e
+      this.task.text = this.currentTask.text;
+      this.task.priority = this.currentTask.priority;
+      this.task.state = this.currentTask.state;
+
+      this.taskService.updateTask(this.task);
+    }
   }
 }
