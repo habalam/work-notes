@@ -52,24 +52,21 @@ public class TaskRestController extends ControllerSupport {
 	}
 
 	@PostMapping(value = "/task/add")
-	public String addTask(@RequestBody Task task) {
+	public void addTask(@RequestBody Task task) {
 		taskRepository.addTask(task);
 		logger.info(task.toString());
-		return OK_RESPONSE_CODE;
 	}
 
 	@PostMapping(value = "/task/update")
-	public String updateTask(@RequestBody Task task) {
+	public void updateTask(@RequestBody Task task) {
 		taskRepository.updateTask(task);
 		logger.info(task.toString());
-		return OK_RESPONSE_CODE;
 	}
 
 	//TODO nejak vyriešiť navratove hodnoty a samozrejme logovanie
 	@PostMapping(value = "/task/delete")
-	public String deleteTaskById(@RequestBody Integer taskId) {
+	public void deleteTaskById(@RequestBody Integer taskId) {
 		taskRepository.deleteTask(taskId);
 		logger.info("Task{id=" + taskId + "} deleted");
-		return OK_RESPONSE_CODE;
 	}
 }

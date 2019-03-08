@@ -12,6 +12,8 @@ import { TasksListComponent } from './app/components/tasks-list/tasks-list.compo
 import { TaskComponent } from './app/components/task/task.component';
 import { TaskViewComponent } from './app/components/task-view/task-view.component';
 import {TaskService} from "./app/classes/task-service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
 
 @NgModule({
   declarations: [
@@ -26,6 +28,9 @@ import {TaskService} from "./app/classes/task-service";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     FormsModule,
     HttpClientModule
   ],

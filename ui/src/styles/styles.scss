@@ -1,3 +1,5 @@
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
 body {
   margin: 0;
 }
@@ -8,6 +10,16 @@ div.left {
 
 div.full {
   width: 100%;
+}
+
+input {
+  border: 1px solid cornflowerblue;
+  border-radius: 5px;
+}
+
+select {
+  border: 1px solid cornflowerblue;
+  border-radius: 5px;
 }
 
 button {
@@ -42,10 +54,18 @@ button:hover {
   width: 65px;
 }
 
-select {
+button {
   color: darkslategray;
 }
 
-button {
-  color: darkslategray;
+.task-status-cell {
+  width: 120px;
+}
+
+.task-priority-cell {
+  width: 100px;
+}
+
+.task-text-cell {
+  flex: 1 1 auto;
 }

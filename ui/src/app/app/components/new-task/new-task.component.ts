@@ -10,7 +10,7 @@ import {TaskService} from "../../classes/task-service";
 })
 export class NewTaskComponent implements OnInit {
 
-  public newTask: Task = new Task("", "", "");
+  public newTask: Task = new Task();
 
   @ViewChild('form') public form: NgForm;
 
@@ -39,7 +39,7 @@ export class NewTaskComponent implements OnInit {
 
   private checkAndAddTask() {
     if (this.isFormValid()) {
-      this.taskService.addTask(new Task(this.newTask.text, this.newTask.priority, this.newTask.state));
+      this.taskService.addTask(this.newTask);
       this.newTask.text = '';
       this.newTask.priority = this.priorities[0];
       this.newTask.state = this.states[0];

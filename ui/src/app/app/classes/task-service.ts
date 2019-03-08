@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Task} from "./task";
-import {Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 
 @Injectable()
 export class TaskService {
@@ -63,14 +63,18 @@ export class TaskService {
     this.states.next(this.storedStates);
   }
 
-  getTasks() {
-    return this.http.get(`/api/task/all`);
+  getTasks(): Observable<Array<Task>> {
+    return this.http.get<Array<Task>>(`/api/task/all`);
   }
 
   refreshTasks() {
     this.getTasks().subscribe((tasks: Array<Task>) => {
-      this.tasks.next(tasks);
-    });
+      let queriedTasks = new Array<Task>();
+      tasks.forEach((task: Task) => {
+        queriedTasks.push(Object.assign(new Task(), task));
+      });
+      this.tasks.next(queriedTasks);
+    });                                                   
   }
 
   //TODO do konzoly loguje null, fixnúť

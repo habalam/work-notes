@@ -36,11 +36,8 @@ export class TaskComponent implements OnInit {
     if (this.task.text != this.currentTask.text || this.task.priority != this.currentTask.priority ||
       this.task.state != this.currentTask.state)
     {
-      //TODO na GUI by sa mali info zmeniť až po tom, ako update úspešne dobehne update na backend-e
-      this.task.text = this.currentTask.text;
-      this.task.priority = this.currentTask.priority;
-      this.task.state = this.currentTask.state;
-
+      //TODO na GUI by sa mali info zmeniť až po tom, ako update úspešne dobehne update na backend-e tj. keď sú dáta uložené v DB
+      this.task.copyTaskValues(this.currentTask);
       this.taskService.updateTask(this.task);
     }
   }
@@ -49,6 +46,6 @@ export class TaskComponent implements OnInit {
     if ((this.states == null || this.priorities.length == null) && this.taskService.enumsInitialized()) {
       this.taskService.resendEnums();
     }
-    this.currentTask = new Task(this.task.text, this.task.priority, this.task.state);
+    this.currentTask = this.task.cloneTask();
   }
 }

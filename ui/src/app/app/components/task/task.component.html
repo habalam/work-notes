@@ -1,20 +1,16 @@
 <form #form="ngForm" novalidate>
   <div class="task-wrapper" (mouseleave)="updateIfNeeded()">
     <div class="task-data">
-      <div class="task-cell text-cell">
-        <div class="cell-content">
-          {{task.text}}
-        </div>
+      <div class="task-cell task-text-cell">
+        {{task.text}}
       </div>
-      <div class="task-cell priority-cell">
+      <div class="task-cell task-priority-cell">
         <div class="cell-content">
           {{task.priority}}
         </div>
       </div>
-      <div class="task-cell status-cell">
-        <div class="cell-content">
-          {{task.state}}
-        </div>
+      <div class="task-cell task-status-cell">
+        {{task.state}}
       </div>
     </div>
     <div class="task-change-wrapper">
@@ -23,7 +19,8 @@
           <div class="div1 left">
             Task text:
           </div>
-          <textarea class="textarea" type="text" placeholder="Add task text..." name="taskText" [(ngModel)]="currentTask.text" required></textarea>
+          <textarea class="textarea" type="text" placeholder="Add task text..." name="taskText"
+            [(ngModel)]="currentTask.text" required></textarea>
         </div>
         <select class="new-task-selectbox" name="taskPriority" [(ngModel)]="currentTask.priority" required>
           <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
@@ -31,6 +28,12 @@
         <select class="new-task-selectbox" name="taskState" [(ngModel)]="currentTask.state" required>
           <option *ngFor="let state of states" [value]="state">{{state}}</option>
         </select>
+        <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Undefined..."
+          [(ngModel)]="currentTask.created" name="createdDatePicker">
+        <owl-date-time #dt1></owl-date-time>
+        <input [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" placeholder="Undefined..."
+          [(ngModel)]="currentTask.closed" name="closedDatePicker">
+        <owl-date-time #dt2></owl-date-time>
         <button (click)="deleteTask()">Delete task</button>
       </div>
     </div>

@@ -10,10 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import sk.habalam.domain.support.TaskPriority;
@@ -72,10 +68,6 @@ public class Task {
 		this.priority = priority;
 	}
 
-	//TODO ak by som chcel ma domain "čisté" tj. bez závislostí ohľadom JSON mappingu, tak by som si
-	// zrejme musel spraviť nejaké DTO-čka... čo aktuálne nechcem... do budúcna zvážiť
-	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@Column(name = "CREATED", nullable = false)
 	public LocalDateTime getCreated() {
 		return created;
@@ -85,10 +77,6 @@ public class Task {
 		this.created = created;
 	}
 
-	//TODO ak by som chcel ma domain "čisté" tj. bez závislostí ohľadom JSON mappingu, tak by som si
-	// zrejme musel spraviť nejaké DTO-čka... čo aktuálne nechcem... do budúcna zvážiť
-	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@Column(name = "CLOSED")
 	public LocalDateTime getClosed() {
 		return closed;

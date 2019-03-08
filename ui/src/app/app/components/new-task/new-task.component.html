@@ -31,6 +31,20 @@
             <option *ngFor="let state of states" [value]="state">{{state}}</option>
           </select>
         </div>
+        <div class="parameter-wrapper">
+          <div class="div1 left">
+            Created:
+          </div>
+          <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Right now..." [(ngModel)]="newTask.created" name="createdDatePicker">
+          <owl-date-time #dt1></owl-date-time>
+        </div>
+        <div class="parameter-wrapper">
+          <div class="div1 left">
+            Closed:
+          </div>
+          <input [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" placeholder="Undefined..." [(ngModel)]="newTask.closed" name="closedDatePicker">
+          <owl-date-time #dt2></owl-date-time>
+        </div>
       </div>
       <div class="full-element-row">
         <button (click)="checkAndAddTask()">Create task</button>

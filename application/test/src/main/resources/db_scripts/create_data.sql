@@ -1,5 +1,5 @@
-INSERT INTO WN_TASK values (1, SYSTIMESTAMP, SYSTIMESTAMP, 'Implementovať Work-notes aplikáciu', 'TOP', 'OPENED');
-INSERT INTO WN_TASK values (2, SYSTIMESTAMP, SYSTIMESTAMP, 'Naprogramovať preväzbovanie medzi UJ s pseudoDIČ a DIČ', 'TOP', 'OPENED');
-INSERT INTO WN_TASK values (3, SYSTIMESTAMP, SYSTIMESTAMP, 'Pridať vnorene tasky (aby som mohol byt nejaky task rozdeleny do viacerých čiastkových)', 'LOW', 'OPENED');
-INSERT INTO WN_TASK values (4, SYSTIMESTAMP, SYSTIMESTAMP, 'Pridať zadávanie/zobrazovanie času vytvorenia/zatvorenia tasku', 'LOW', 'OPENED');
-INSERT INTO WN_TASK values (5, SYSTIMESTAMP, SYSTIMESTAMP, 'Dorobiť ukladanie zobrazovanie nových taskov cez GUI', 'HIGH', 'OPENED');
+INSERT INTO WN_TASK values (1, PARSEDATETIME('20-01-19 11:34:24','dd-MM-yy hh:mm:ss'), null, 'Implementovať Work-notes aplikáciu', 'TOP', 'IN_PROGRESS');
+INSERT INTO WN_TASK values (2, PARSEDATETIME('07-02-19 8:12:59','dd-MM-yy hh:mm:ss'), null, 'Naprogramovať preväzbovanie medzi UJ s pseudoDIČ a DIČ', 'TOP', 'IN_PROGRESS');
+INSERT INTO WN_TASK values (3, PARSEDATETIME('13-02-19 18:59:00','dd-MM-yy hh:mm:ss'), null, 'Pridať vnorene tasky (aby som mohol byt nejaky task rozdeleny do viacerých čiastkových)', 'LOW', 'OPENED');
+INSERT INTO WN_TASK values (4, PARSEDATETIME('10-02-19 16:48:59','dd-MM-yy hh:mm:ss'), null, 'Pridať zadávanie/zobrazovanie času vytvorenia/zatvorenia tasku', 'LOW', 'IN_PROGRESS');
+INSERT INTO WN_TASK values (5, PARSEDATETIME('25-01-19 15:54:19','dd-MM-yy hh:mm:ss'), PARSEDATETIME('01-03-19 17:16:08','dd-MM-yy hh:mm:ss'), 'Dorobiť ukladanie zobrazovanie nových taskov cez GUI', 'HIGH', 'CLOSED');
