@@ -37,7 +37,6 @@ public class TaskRepositoryImpl extends RepositoryBase implements TaskRepository
 	@Override
 	@Transactional
 	public void addTask(Task task) {
-		task.setCreated(LocalDateTime.now());
 		entityManager.persist(task);
 	}
 

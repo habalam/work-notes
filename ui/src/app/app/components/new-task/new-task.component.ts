@@ -39,10 +39,15 @@ export class NewTaskComponent implements OnInit {
 
   private checkAndAddTask() {
     if (this.isFormValid()) {
+      if (this.newTask.created == null) {
+        this.newTask.created = new Date();
+      }
       this.taskService.addTask(this.newTask);
       this.newTask.text = '';
       this.newTask.priority = this.priorities[0];
       this.newTask.state = this.states[0];
+      this.newTask.created = null;
+      this.newTask.closed = null;
     }
   }
 

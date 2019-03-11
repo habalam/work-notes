@@ -1,6 +1,7 @@
 package sk.habalam.controller;
 
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sk.habalam.domain.Task;
 import sk.habalam.respository.TaskRepository;
 import sk.habalam.service.JsonService;
+import sk.habalam.utils.BaseUtils;
 
 @RestController
 public class TaskRestController extends ControllerSupport {
@@ -53,6 +55,9 @@ public class TaskRestController extends ControllerSupport {
 
 	@PostMapping(value = "/task/add")
 	public void addTask(@RequestBody Task task) {
+		//TODO taketo veci by som mal odlozit do nejakej servisnej triedy... TaskRestService?
+		task.setCreated(BaseUtils.applyTimezoneAtLocalDateTime(task.getCreated(), ZoneOffset.UTC));
+		task.setClosed(BaseUtils.applyTimezoneAtLocalDateTime(task.getClosed(), ZoneOffset.UTC));
 		taskRepository.addTask(task);
 		logger.info(task.toString());
 	}

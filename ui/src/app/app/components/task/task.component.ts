@@ -14,10 +14,10 @@ export class TaskComponent implements OnInit {
 
   @Input() task: Task;
 
-  private currentTask: Task;
+  public currentTask: Task;
 
-  private priorities: Array<string>;
-  private states: Array<string>;
+  public priorities: Array<string>;
+  public states: Array<string>;
 
   constructor(private taskService: TaskService) {
     this.taskService.observablePriorities.subscribe((priorities: Array<string>) => {

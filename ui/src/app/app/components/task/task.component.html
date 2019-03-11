@@ -22,19 +22,41 @@
           <textarea class="textarea" type="text" placeholder="Add task text..." name="taskText"
             [(ngModel)]="currentTask.text" required></textarea>
         </div>
-        <select class="new-task-selectbox" name="taskPriority" [(ngModel)]="currentTask.priority" required>
-          <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
-        </select>
-        <select class="new-task-selectbox" name="taskState" [(ngModel)]="currentTask.state" required>
-          <option *ngFor="let state of states" [value]="state">{{state}}</option>
-        </select>
-        <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Undefined..."
-          [(ngModel)]="currentTask.created" name="createdDatePicker">
-        <owl-date-time #dt1></owl-date-time>
-        <input [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" placeholder="Undefined..."
-          [(ngModel)]="currentTask.closed" name="closedDatePicker">
-        <owl-date-time #dt2></owl-date-time>
-        <button (click)="deleteTask()">Delete task</button>
+        <div class="parameter-wrapper">
+          <div class="div1 left">
+            Priority:
+          </div>
+          <select class="new-task-selectbox" name="taskPriority" [(ngModel)]="currentTask.priority" required>
+            <option *ngFor="let priority of priorities" [value]="priority">{{priority}}</option>
+          </select>
+        </div>
+        <div class="parameter-wrapper">
+          <div class="div1 left">
+            State:
+          </div>
+          <select class="new-task-selectbox" name="taskState" [(ngModel)]="currentTask.state" required>
+            <option *ngFor="let state of states" [value]="state">{{state}}</option>
+          </select>
+        </div>
+        <div class="parameter-wrapper">
+          <div class="div1 left">
+            Created:
+          </div>
+          <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Undefined..."
+            [(ngModel)]="currentTask.created" name="createdDatePicker">
+          <owl-date-time #dt1></owl-date-time>
+        </div>
+        <div class="parameter-wrapper">
+          <div class="div1 left">
+            Closed:
+          </div>
+          <input [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" placeholder="Undefined..."
+            [(ngModel)]="currentTask.closed" name="closedDatePicker">
+          <owl-date-time #dt2></owl-date-time>
+        </div>
+        <div class="full left">
+          <button (click)="deleteTask()">Delete task</button>
+        </div>
       </div>
     </div>
   </div>
