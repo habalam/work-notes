@@ -8,6 +8,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -18,17 +20,21 @@ import sk.habalam.utils.BaseUtils;
 
 @Entity
 @Table(name = "WN_TASK")
-public class Task {
-
-	//TODO setovanie ID oddeliť do nejakej nadtriedy... typicky chceme prakticky u všetkých entít
-	private Integer id;
+public class Task extends BaseEntity<Integer> {
 
 	private String text;
 	private TaskPriority priority;
 	private TaskState state;
 	private LocalDateTime created;
 	private LocalDateTime closed;
-	//TODO pridať nejaku temu, ku ktorej task moze patriť
+
+	//TODO doplniť funkčnosť - toto by malo technicky pokryť všetko čo som aktuálne mal v Notepade
+	private TaskTheme taskTheme;
+//	private List<Task> childTasks;
+
+	//TODO doplniť rôzne "views" nad taskami - všetky nakopu, rozdelené po dňoch (takto to mám v notepade), podľa stavov, ...
+	//TODO možno pridať údaj dokedy by mala byť úloha splnená
+	//TODO zvážiť nejaké notifikácie keď má vypršať čas, dokedy by mala byť úloha hotová
 
 	@Id
 	@Column(name = "ID", nullable = false, unique = true, precision = 10)
@@ -41,12 +47,9 @@ public class Task {
 			@Parameter(name = "increment_size", value = "1")
 		}
 	)
+	@Override
 	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+		return super.getId();
 	}
 
 	@Column(name = "TEXT", nullable = false)
@@ -94,6 +97,16 @@ public class Task {
 
 	public void setState(TaskState state) {
 		this.state = state;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "WN_TASK_THEME_ID")
+	public TaskTheme getTaskTheme() {
+		return this.taskTheme;
+	}
+
+	public void setTaskTheme(TaskTheme taskTheme) {
+		this.taskTheme = taskTheme;
 	}
 
 	@Override
