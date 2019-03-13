@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Task} from "../../classes/task";
 import {TaskService} from "../../classes/task-service";
+import {TaskTabView} from "../../enums/task-tabs.enum";
 
 @Component({
   selector: 'wn-task-view',
@@ -9,6 +10,9 @@ import {TaskService} from "../../classes/task-service";
 })
 export class TaskViewComponent implements OnInit {
 
+  public taskTabViews: any = TaskTabView;
+
+  public tabSelected = TaskTabView.SIMPLE_LIST_VIEW;
   public tasks: Array<Task>;
   public tasksCount: number;
 
@@ -21,5 +25,9 @@ export class TaskViewComponent implements OnInit {
 
   ngOnInit() {
     this.taskService.refreshTasks();
+  }
+
+  changeSelectedTab(tabSelected: TaskTabView) {
+    this.tabSelected = tabSelected;
   }
 }

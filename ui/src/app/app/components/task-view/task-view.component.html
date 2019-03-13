@@ -1,3 +1,18 @@
 <wn-new-task></wn-new-task>
 <!--TODO toto by sa dalo určite vyriešiť lepšie - nie napĺňať tasksCount... možno s použitím "async"?-->
-<wn-tasks-list *ngIf="tasksCount > 0" [tasks]="tasks"></wn-tasks-list>
+<div *ngIf="tasksCount > 0" class="task-list-wrapper">
+  <div class="task-list-tabs">
+    <div class="tasks-tab-element">
+      Tasks list
+    </div>
+    <div (click)="changeSelectedTab(taskTabViews.TASKS_BY_DAY_VIEW)" class="tasks-tab-element">
+      Tasks by day
+    </div>
+  </div>
+  <div class="tasks-table">
+    <wn-tasks-list *ngIf="tabSelected == taskTabViews.SIMPLE_LIST_VIEW" [tasks]="tasks"></wn-tasks-list>
+    <!--TODO pridať komponent pre zobrazovanie taskov po jednotlivých dňoch s tým, že každý deň zobrazí
+     iba tasky aktívne v daný deň, alebo v daný deň zavreté-->
+    <wn-tasks-list *ngIf="tabSelected == taskTabViews.TASKS_BY_DAY_VIEW" [tasks]="tasks"></wn-tasks-list>
+  </div>
+</div>
