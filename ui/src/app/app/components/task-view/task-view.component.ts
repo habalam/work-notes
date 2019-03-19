@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Task} from "../../classes/task";
-import {TaskService} from "../../classes/task-service";
 import {TaskTabView} from "../../enums/task-tabs.enum";
+import {TaskService} from "../../classes/task-service";
+import {Task} from '../../classes/task';
 
 @Component({
   selector: 'wn-task-view',

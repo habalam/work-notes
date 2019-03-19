@@ -56,8 +56,11 @@ export class NewTaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    if((this.states == null || this.priorities == null) && this.taskService.enumsInitialized()) {
-      this.taskService.resendEnums();
+    if((this.states == null || this.priorities == null)) {
+      if (this.taskService.enumsInitialized()) {
+        this.priorities = this.taskService.storedPriorities;
+        this.states = this.taskService.storedStates;
+      }
     }
   }
 }

@@ -1,22 +1,26 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Task} from "./task";
-import {Observable, Subject} from "rxjs";
+import {Observable, Subscriber} from "rxjs";
+import {JsonToObjectTransformer} from "./json-to-object-transformer";
 
 @Injectable()
 export class TaskService {
 
+  //TODO formulárové dáta ukladať do storage(local, session) - toto by vyriešilo
+  // problém pri refreshy stránky - napr. aby sa otvoril tab, ktorý bol otvorený predtým
+
   //TODO oddelit service na inicializaciu Enumov (Priorities, States) samostatne
-  private tasks = new Subject<Array<Task>>();
-  private priorities = new Subject<Array<string>>();
-  private states = new Subject<Array<string>>();
+  private tasksObserver = new Subscriber<Array<Task>>();
+  private prioritiesObserver = new Subscriber<Array<string>>();
+  private statesObserver = new Subscriber<Array<string>>();
 
-  private storedPriorities = new Array<string>();
-  private storedStates = new Array<string>();
+  public storedPriorities = new Array<string>();
+  public storedStates = new Array<string>();
 
-  observableTasks = this.tasks.asObservable();
-  observablePriorities = this.priorities.asObservable();
-  observableStates = this.states.asObservable();
+  observableTasks = new Observable<Array<Task>>(o => this.tasksObserver = o);
+  observablePriorities = new Observable<Array<string>>(o => this.prioritiesObserver = o);
+  observableStates = new Observable<Array<string>>(o => this.statesObserver = o);
 
   private prioritiesInitialized = false;
   private statesInitialized = false;
@@ -36,16 +40,10 @@ export class TaskService {
     return this.prioritiesInitialized && this.statesInitialized;
   }
 
-  //TODO stále nemám vyladené - bijú sa mi koncepty Observable a single inicializácia pri spustení/refresh -
-  // problém je v tom, že ak by som sa spoľahol iba na Observable implementáciu, tak push operácia (.next)
-  // sa môže spustiť ešte predtým ako budú všetci subscribnutý (tj. pre daný Observer bude pole prázdne)
-  // ale ak zas použijem statické pole, to tiež nemusí byť v okamihu keď ho budem potrebovať naplnené (a
-  // už nemám šancu túto info pushnúť na prešírenie)... problém vyplýva z toho, že v Angulare sa všetky
-  // componenty inicializujú súčasne a zároveň call-y na backend sú realizované asynchrónne
   getTaskPriorities() {
     return this.http.get(`/api/task/priorities`).subscribe((priorities: Array<string>) => {
       this.storedPriorities = priorities;
-      this.priorities.next(this.storedPriorities);
+      this.prioritiesObserver.next(this.storedPriorities);
       this.prioritiesInitialized = true;
     });
   }
@@ -53,14 +51,9 @@ export class TaskService {
   getTaskStates() {
     return this.http.get(`/api/task/states`).subscribe((states: Array<string>) => {
       this.storedStates = states;
-      this.states.next(this.storedStates);
+      this.statesObserver.next(this.storedStates);
       this.statesInitialized = true;
     });
-  }
-
-  resendEnums() {
-    this.priorities.next(this.storedPriorities);
-    this.states.next(this.storedStates);
   }
 
   getTasks(): Observable<Array<Task>> {
@@ -69,15 +62,11 @@ export class TaskService {
 
   refreshTasks() {
     this.getTasks().subscribe((tasks: Array<Task>) => {
-      let queriedTasks = new Array<Task>();
-      tasks.forEach((task: Task) => {
-        queriedTasks.push(Object.assign(new Task(), task));
-      });
-      this.tasks.next(queriedTasks);
+      let queriedTasks = JsonToObjectTransformer.transformTaskArrayJsonToObjects(Task, tasks);
+      this.tasksObserver.next(queriedTasks);
     });                                                   
   }
 
-  //TODO do konzoly loguje null, fixnúť
   addTask(task: Task) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -85,12 +74,9 @@ export class TaskService {
       })
     };
     this.http.post(`/api/task/add`, JSON.stringify(task), httpOptions)
-      .subscribe(response => console.log(response), error => console.log(error), () => {
-        this.refreshTasks();
-      });
+      .subscribe(() => this.refreshTasks());
   }
 
-  //TODO do konzoly loguje null, fixnúť
   deleteTask(id: number) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -98,9 +84,7 @@ export class TaskService {
       })
     };
     this.http.post(`/api/task/delete`, JSON.stringify(id), httpOptions)
-      .subscribe(response => console.log(response), error => console.log(error), () => {
-        this.refreshTasks();
-      });
+      .subscribe(() => this.refreshTasks());
   }
 
   updateTask(task: Task) {
