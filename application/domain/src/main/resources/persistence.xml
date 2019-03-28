@@ -6,6 +6,8 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>sk.habalam.domain.Task</class>
 		<class>sk.habalam.domain.TaskTheme</class>
+		<class>sk.habalam.domain.User</class>
+		<class>sk.habalam.domain.Role</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	</persistence-unit>
 </persistence>

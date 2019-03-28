@@ -1,11 +1,53 @@
+//TODO celý buildscript zrevidovať a vymyslieť, ako použitie azure gradle pluginu spraviť lepšie
+buildscript {
+	repositories {
+		jcenter()
+		maven {
+			url uri('C:\\Users\\Grondal\\.m2')
+		}
+	}
+	dependencies {
+		classpath group: 'lenala.azure', name: 'azure-webapp-gradle-plugin', version: '1.0'
+	}
+}
+
+
+plugins {
+	//TODO verziu Spring boot-u vyviesť niekde osve
+	id 'org.springframework.boot' version "2.1.2.RELEASE"
+	id 'lenala.azure.azurewebapp' version '1.0'
+}
+
 dependencies {
 	compile project(':application:impl')
-	testCompile project(':application:test')
-
 	compile 'org.springframework.boot:spring-boot-configuration-processor:2.1.2.RELEASE'
-	compile 'org.springframework.boot:spring-boot-starter-data-jpa:2.1.2.RELEASE'
-	implementation 'org.springframework.boot:spring-boot-starter-web:2.1.2.RELEASE'
-
-	implementation 'com.h2database:h2:1.4.197'
+	compile 'com.microsoft.sqlserver:mssql-jdbc:7.2.1.jre8'
 	compile 'com.google.guava:guava:27.0.1-jre'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.1.2.RELEASE'
+	
+	testCompile project(':application:test')
+	testImplementation 'com.h2database:h2:1.4.197'
+}
+
+azureWebApp {
+	//TODO volať ako nejaké premenné prostredia resp. malo by to byť nejako definované podľa prostredia
+	resourceGroup = "work-notes"
+	appName = "work-notes-jar"
+	appServicePlanName="ServicePlan25041d88-94e5"
+
+	appService = {
+		type = 'linux'
+		//TODO prerobiť na Javu 11
+		runtimeStack = "jre8"
+	}
+
+	authentication = {
+		type = "file"
+		//TODO spraviť cestu univerzalnou
+		file = "C:\\Users\\habala\\grondal.azureauth"
+	}
+
+	deployment = {
+		type = "jar"
+	}
 }

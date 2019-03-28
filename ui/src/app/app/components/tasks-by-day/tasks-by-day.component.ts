@@ -9,7 +9,7 @@ import {Task} from "../../classes/task";
 export class TasksByDayComponent implements OnInit {
 
   @Input()
-  private filteredTasks: Array<Task>;
+  public filteredTasks: Array<Task>;
   //TODO doimplementovať - chýba celé HTML pre zobrazovanie taskoch po dňoch, týždňoch, ...
   //TODO v rámci @Input-u robiť ordering/sorting (vyrobiť si na to nejakú service, ktorú by som mohol používať všeobecne
   // na tieto účely pre tasky na všetkých views)

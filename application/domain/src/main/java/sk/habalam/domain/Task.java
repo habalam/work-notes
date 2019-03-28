@@ -32,6 +32,9 @@ public class Task extends BaseEntity<Integer> {
 	private TaskTheme taskTheme;
 //	private List<Task> childTasks;
 
+	/** Owner of this {@link Task}*/
+	private User user;
+
 	//TODO doplniť rôzne "views" nad taskami - všetky nakopu, rozdelené po dňoch (takto to mám v notepade), podľa stavov, ...
 	//TODO možno pridať údaj dokedy by mala byť úloha splnená
 	//TODO zvážiť nejaké notifikácie keď má vypršať čas, dokedy by mala byť úloha hotová
@@ -109,15 +112,27 @@ public class Task extends BaseEntity<Integer> {
 		this.taskTheme = taskTheme;
 	}
 
+	//TODO chcem toto naozaj mať namapované? malo by stačiť iba ID usera resp. určite by som tieto dáta nemal posielať na klienta
+	@ManyToOne
+	@JoinColumn(name = "WN_USER_ID", nullable = false)
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "Task{" +
 			"id=" + id + ", " +
-			"text='" + text + ", " +
-			"priority=" + priority.name() + ", " +
-			"state=" + state.name() + ", " +
-			"created=" + BaseUtils.formatDateTimeUiFormat(created) + ", " +
-			"closed=" + BaseUtils.formatDateTimeUiFormat(closed) +
+			", text='" + text +
+			", priority=" + priority.name() +
+			", state=" + state.name() +
+			", created=" + BaseUtils.formatDateTimeUiFormat(created) +
+			", closed=" + BaseUtils.formatDateTimeUiFormat(closed) +
+			", user=" + user.getId() +
 			'}';
 	}
 }

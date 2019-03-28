@@ -2,18 +2,12 @@ package sk.habalam.domain;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import sk.habalam.domain.support.TaskThemeState;
+import sk.habalam.utils.BaseUtils;
 
 @Entity
 @Table(name = "WN_TASK_THEME")
@@ -24,6 +18,8 @@ public class TaskTheme extends BaseEntity<Integer> {
 	private TaskThemeState state;
 	private LocalDateTime created;
 	private LocalDateTime closed;
+
+	private User user;
 
 	@Id
 	@Column(name = "WN_TASK_THEME_ID", nullable = false, updatable = false, unique = true)
@@ -84,5 +80,26 @@ public class TaskTheme extends BaseEntity<Integer> {
 
 	public void setClosed(LocalDateTime closed) {
 		this.closed = closed;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "WN_USER_ID", nullable = false)
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "TaskTheme{" +
+			"id=" + id +
+			", name=" + name +
+			", state=" + state +
+			", created=" + BaseUtils.formatDateTimeUiFormat(created) +
+			", closed=" + BaseUtils.formatDateTimeUiFormat(closed) +
+			", user=" + user.getId() + "}";
 	}
 }

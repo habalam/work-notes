@@ -2,11 +2,11 @@ subprojects {
 	apply plugin: 'java'
 
 	compileJava {
-		options.encoding = sourceEncoding
+		options.encoding = 'UTF-8'
 	}
 
 	compileTestJava {
-		options.encoding = sourceEncoding
+		options.encoding = 'UTF-8'
 	}
 	
 	repositories {

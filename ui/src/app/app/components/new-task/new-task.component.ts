@@ -37,7 +37,7 @@ export class NewTaskComponent implements OnInit {
     })
   }
 
-  private checkAndAddTask() {
+  public checkAndAddTask() {
     if (this.isFormValid()) {
       if (this.newTask.created == null) {
         this.newTask.created = new Date();
