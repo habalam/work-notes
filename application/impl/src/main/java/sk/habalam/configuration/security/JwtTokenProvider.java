@@ -3,6 +3,7 @@ package sk.habalam.configuration.security;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -12,27 +13,19 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import sk.habalam.domain.Role;
-import sk.habalam.service.UserAuthenticationService;
 
 @Component
 public class JwtTokenProvider {
 
-	private final UserAuthenticationService userAuthenticationService;
-
-	@Autowired
-	public JwtTokenProvider(UserAuthenticationService userAuthenticationService) {
-		this.userAuthenticationService = userAuthenticationService;
-	}
-
 	@Value("${security.jwt.token.secret-key}")
-	private String secretKey = "secred";
+	private String secretKey = "secret";
 
 	@Value("${security.jwt.token.validity-in-millis:360000}")
 	private long tokenValidityInMillis = 360000;
@@ -42,9 +35,10 @@ public class JwtTokenProvider {
 		secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
 	}
 
-	public String createToken(String userName, List<Role> roles) {
+	public String createToken(Integer userId, String userName, List<Role> roles) {
 		Claims claims = Jwts.claims().setSubject(userName);
-		claims.put("roles", roles);
+		claims.put("userId", userId);
+		claims.put("userRoles", roles.stream().map(Role::getName).collect(Collectors.toList()));
 		Date now = new Date();
 		Date validityEnds = new Date(now.getTime() + tokenValidityInMillis);
 		return Jwts.builder()
@@ -55,12 +49,17 @@ public class JwtTokenProvider {
 			.compact();
 	}
 
-	private String getUserName(String token) {
-		return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+	public UserDetailsCustom getUserData(String token) {
+		Claims jwtClaims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+		@SuppressWarnings("unchecked") List<String> userRoles = (List<String>) jwtClaims.get("userRoles", List.class);
+		Integer userId = jwtClaims.get("userId", Integer.class);
+		String userName = jwtClaims.getSubject();
+		List<GrantedAuthority> authorities = userRoles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+		return new UserDetailsCustom(userId, userName, "", authorities, null);
 	}
 
 	public Authentication getAuthentication(String token) {
-		UserDetails userDetails = userAuthenticationService.loadUserByUsername(getUserName(token));
+		UserDetailsCustom userDetails = getUserData(token);
 		return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
 	}
 

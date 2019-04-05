@@ -30,21 +30,24 @@ dependencies {
 }
 
 azureWebApp {
-	//TODO volať ako nejaké premenné prostredia resp. malo by to byť nejako definované podľa prostredia
+	//TODO volať ako nejaké premenné prostredia resp. malo by to byť nejako definované podľa prostredia pri deploymente
 	resourceGroup = "work-notes"
 	appName = "work-notes-jar"
 	appServicePlanName="ServicePlan25041d88-94e5"
 
 	appService = {
 		type = 'linux'
-		//TODO prerobiť na Javu 11
+		//aktuálne neexistuje iný "plugin" priamo na deploy zo Azure z gradle taký, ktorý by podporoval Javu 11
 		runtimeStack = "jre8"
 	}
 
+	def azureAuthFile = String.valueOf(System.getenv('AZURE_AUTH_FILE_PATH'))
+	println(azureAuthFile)
+	
+	
 	authentication = {
 		type = "file"
-		//TODO spraviť cestu univerzalnou
-		file = "C:\\Users\\habala\\grondal.azureauth"
+		file = "C:\\Users\\Grondal\\grondal.azureauth"
 	}
 
 	deployment = {

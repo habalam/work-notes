@@ -3,18 +3,24 @@
     <img src="assets/img/wn_icon_64x64.png" alt="Logo"/>
   </div>
   <div class="header-title-background">
-    <div class="header-title">
+    <div class="header-title" routerLink="/notes">
       Work-notes
     </div>
   </div>
   <div class="header-base">
+    <div class="menu-item" routerLink="/login" *ngIf="!currentUserName">
+      Login
+    </div>
+    <div class="menu-item" routerLink="/login" *ngIf="currentUserName" (click)="logout()">
+      {{currentUserName}}|Logout
+    </div>
     <div class="menu-item">
       About
     </div>
     <div class="menu-item">
       Licence
     </div>
-    <div class="menu-item">
+    <div class="menu-item" routerLink="/notes">
       Work-notes
     </div>
   </div>

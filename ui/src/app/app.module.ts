@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './app/components/header/header.component';
@@ -15,6 +15,10 @@ import {TaskService} from "./app/classes/task-service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
 import {TasksByDayComponent} from './app/components/tasks-by-day/tasks-by-day.component';
+import {AppRoutingModule} from './app-routing.module';
+import {LoginComponent} from "./app/components/login/login.component";
+import {AuthService} from "./app/classes/authentication/auth.service";
+import {JwtInterceptor} from "./app/classes/authentication/jwt-interceptor";
 
 @NgModule({
   declarations: [
@@ -26,7 +30,8 @@ import {TasksByDayComponent} from './app/components/tasks-by-day/tasks-by-day.co
     TasksListComponent,
     TaskComponent,
     TaskViewComponent,
-    TasksByDayComponent
+    TasksByDayComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +39,14 @@ import {TasksByDayComponent} from './app/components/tasks-by-day/tasks-by-day.co
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
-  providers: [TaskService],
+  providers: [
+    TaskService,
+    AuthService,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

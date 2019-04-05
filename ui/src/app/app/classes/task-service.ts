@@ -62,7 +62,7 @@ export class TaskService {
 
   refreshTasks() {
     this.getTasks().subscribe((tasks: Array<Task>) => {
-      let queriedTasks = JsonToObjectTransformer.transformTaskArrayJsonToObjects(Task, tasks);
+      let queriedTasks = JsonToObjectTransformer.transformObjectArrayJsonToObjects(Task, tasks);
       this.tasksObserver.next(queriedTasks);
     });                                                   
   }

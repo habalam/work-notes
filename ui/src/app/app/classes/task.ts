@@ -16,6 +16,7 @@ export class Task implements ParsableJsonObject {
     newTask.parseFromJson(this);
     return newTask;
   }
+
   parseFromJson(jsonObject: any) {
     this.id = jsonObject.id;
     this.text = jsonObject.text;

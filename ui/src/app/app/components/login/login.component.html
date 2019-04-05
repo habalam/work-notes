@@ -1,0 +1,19 @@
+<div style="width: 100%; float: left">
+  <div style="float:left; width: 100%; padding: 0 0 10px 0; text-align: center;">
+    <div style="display: inline-block;">
+      <div class="div2" style="float: left;">
+        Login name:
+      </div>
+      <input [(ngModel)]="login" style="float: left;"/>
+    </div>
+  </div>
+  <div style="float: left; width: 100%; padding: 0 0 10px 0; text-align: center">
+    <div style="display: inline-block;">
+      <div class="div2" style="float: left;">
+        Password:
+      </div>
+      <input [(ngModel)]="password" type="password" style="float: left;"/>
+    </div>
+  </div>
+  <button (click)="loginUser()">Login</button>
+</div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../../classes/authentication/auth.service";
 
 @Component({
   selector: 'wn-header',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public currentUserName: any;
+
+  constructor(private authService: AuthService) {
+    this.authService.observableUser.subscribe((user: any) => {
+      if (user) {
+        this.currentUserName = user.userName;
+      }
+      else this.currentUserName = null;
+    })
+  }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.authService.logout();
+  }
 }
