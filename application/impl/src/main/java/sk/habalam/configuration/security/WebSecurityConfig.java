@@ -39,12 +39,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().disable().csrf().disable().sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-			//TODO for implementation purposes only - upraviť
 			.antMatchers("/auth/login").permitAll()
-			.antMatchers("/auth/register").permitAll()
+			.antMatchers("/user/registration").permitAll()
+			.antMatchers("/user/**").hasAuthority("USER")
 			.antMatchers("/task/**").hasAuthority("USER")
 			//TODO copy/paste reevaluate
-			.antMatchers("/api/products/**").hasAuthority("ADMIN").anyRequest().authenticated().and().csrf()
+			.anyRequest().authenticated().and().csrf()
 			.disable().exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint()).and()
 			.apply(new JwtConfigurer(jwtTokenProvider));
 	}

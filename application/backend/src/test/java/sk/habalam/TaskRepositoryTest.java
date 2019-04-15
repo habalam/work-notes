@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.annotations.Test;
 import sk.habalam.annotation.MethodScopeData;
 import sk.habalam.application.Application;
+import sk.habalam.configuration.security.UserContext;
 import sk.habalam.domain.QTask;
 import sk.habalam.domain.Task;
 import sk.habalam.domain.support.TaskPriority;
@@ -49,7 +50,7 @@ public class TaskRepositoryTest extends RepositoryTestBase {
 
 	@Test
 	public void findAllTasks() {
-		List<Task> tasks = taskRepository.findAll();
+		List<Task> tasks = taskRepository.findAllUserTasks(UserContext.getCurrentUserId());
 		Assertions.assertThat(tasks.size()).isEqualTo(6);
 
 		Task task = tasks.get(0);

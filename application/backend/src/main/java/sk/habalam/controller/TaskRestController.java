@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import sk.habalam.configuration.security.UserContext;
 import sk.habalam.domain.Task;
 import sk.habalam.respository.TaskRepository;
 import sk.habalam.service.JsonService;
@@ -47,9 +48,9 @@ public class TaskRestController extends ControllerSupport {
 		}
 	}
 
-	@GetMapping(value = "/task/all")
-	public String getAllTasks() {
-		List<Task> tasks = taskRepository.findAll();
+	@GetMapping(value = "/task/allByUser")
+	public String getAllUserTasks() {
+		List<Task> tasks = taskRepository.findAllUserTasks(UserContext.getCurrentUserId());
 		return jsonService.writeAsString(tasks);
 	}
 
@@ -69,6 +70,8 @@ public class TaskRestController extends ControllerSupport {
 	}
 
 	//TODO nejak vyriešiť navratove hodnoty a samozrejme logovanie
+	//TODO deletovanie taskov nechcem - tasky sa close-uju a closenute sa v ďalších dňoch už zobrazovať nebudú resp. vo
+	// výhľade s aktívnymi taskami
 	@PostMapping(value = "/task/delete")
 	public void deleteTaskById(@RequestBody Integer taskId) {
 		taskRepository.deleteTask(taskId);

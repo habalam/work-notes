@@ -35,32 +35,18 @@ public class JwtTokenProvider {
 		secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
 	}
 
-	public String createToken(Integer userId, String userName, List<Role> roles) {
-		Claims claims = Jwts.claims().setSubject(userName);
-		claims.put("userId", userId);
-		claims.put("userRoles", roles.stream().map(Role::getName).collect(Collectors.toList()));
-		Date now = new Date();
-		Date validityEnds = new Date(now.getTime() + tokenValidityInMillis);
-		return Jwts.builder()
-			.setClaims(claims)
-			.setIssuedAt(now)
-			.setExpiration(validityEnds)
-			.signWith(SignatureAlgorithm.HS256, secretKey)
-			.compact();
+	public Authentication getAuthentication(String token) {
+		UserDetailsCustom userDetails = getUserData(token);
+		return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
 	}
 
-	public UserDetailsCustom getUserData(String token) {
+	private UserDetailsCustom getUserData(String token) {
 		Claims jwtClaims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
 		@SuppressWarnings("unchecked") List<String> userRoles = (List<String>) jwtClaims.get("userRoles", List.class);
 		Integer userId = jwtClaims.get("userId", Integer.class);
 		String userName = jwtClaims.getSubject();
 		List<GrantedAuthority> authorities = userRoles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 		return new UserDetailsCustom(userId, userName, "", authorities, null);
-	}
-
-	public Authentication getAuthentication(String token) {
-		UserDetailsCustom userDetails = getUserData(token);
-		return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
 	}
 
 	public boolean validateToken(String token) {
@@ -79,5 +65,19 @@ public class JwtTokenProvider {
 			return bearerToken.substring(7);
 		}
 		return null;
+	}
+
+	public String createToken(UserDetailsCustom userDetails) {
+		Claims claims = Jwts.claims().setSubject(userDetails.getUsername());
+		claims.put("userId", userDetails.getUserId());
+		claims.put("userRoles", userDetails.getUserRoles().stream().map(Role::getName).collect(Collectors.toList()));
+		Date now = new Date();
+		Date validityEnds = new Date(now.getTime() + tokenValidityInMillis);
+		return Jwts.builder()
+			.setClaims(claims)
+			.setIssuedAt(now)
+			.setExpiration(validityEnds)
+			.signWith(SignatureAlgorithm.HS256, secretKey)
+			.compact();
 	}
 }

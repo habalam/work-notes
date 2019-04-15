@@ -15,6 +15,14 @@ public class UserRepositoryImpl extends RepositoryBase implements UserRepository
 	}
 
 	@Override
+	public boolean userWithNameOrEmailExists(String userName, String email) {
+		return !jpaQueryFactory.selectFrom(QUser.user)
+			.where(QUser.user.name.eq(userName)
+				.or(QUser.user.email.eq(email)))
+			.fetch().isEmpty();
+	}
+
+	@Override
 	public User findUserByEmail(String userEmail) {
 		return jpaQueryFactory.selectFrom(QUser.user).where(QUser.user.email.eq(userEmail)).fetchOne();
 	}

@@ -37,3 +37,11 @@
 .header-title-background {
   background-color: cornflowerblue;
 }
+
+.menu-active-element {
+  cursor: pointer;
+}
+
+.menu-active-element:hover {
+  color: gold;
+}

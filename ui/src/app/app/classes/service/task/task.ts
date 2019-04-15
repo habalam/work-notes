@@ -1,5 +1,6 @@
 import {TaskTheme} from "./task-theme";
-import {ParsableJsonObject} from "./parsable-json-object";
+import {ParsableJsonObject} from "../../parsable-json-object";
+import {JsonToObjectTransformer} from "../../json-to-object-transformer";
 
 export class Task implements ParsableJsonObject {
 
@@ -25,12 +26,7 @@ export class Task implements ParsableJsonObject {
     this.created = jsonObject.created;
     this.closed = jsonObject.closed;
     if(jsonObject.taskTheme != null) {
-      if (this.taskTheme != null) {
-        this.taskTheme.parseFromJson(jsonObject.taskTheme);
-      }
-      else {
-        this.taskTheme = new TaskTheme().parseFromJson(jsonObject.taskTheme);
-      }
+      this.taskTheme = JsonToObjectTransformer.transformJsonToObject(TaskTheme, jsonObject.taskTheme);
     }
   }
 

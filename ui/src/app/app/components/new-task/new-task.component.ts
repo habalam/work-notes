@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
-import {Task} from "../../classes/task";
+import {Task} from "../../classes/service/task/task";
 import {NgForm} from "@angular/forms";
-import {TaskService} from "../../classes/task-service";
+import {TaskService} from "../../classes/service/task/task-service";
 
 @Component({
   selector: 'wn-new-task',

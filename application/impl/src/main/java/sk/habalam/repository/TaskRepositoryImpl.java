@@ -21,8 +21,10 @@ public class TaskRepositoryImpl extends RepositoryBase implements TaskRepository
 	}
 
 	@Override
-	public List<Task> findAll() {
-		return jpaQueryFactory.selectFrom(QTask.task).fetch();
+	public List<Task> findAllUserTasks(Integer userId) {
+		return jpaQueryFactory.selectFrom(QTask.task)
+			.where(QTask.task.user.id.eq(userId))
+			.fetch();
 	}
 
 	@Override

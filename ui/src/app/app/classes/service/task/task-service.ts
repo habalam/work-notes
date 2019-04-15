@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Task} from "./task";
 import {Observable, Subscriber} from "rxjs";
-import {JsonToObjectTransformer} from "./json-to-object-transformer";
+import {JsonToObjectTransformer} from "../../json-to-object-transformer";
 
 @Injectable()
 export class TaskService {
@@ -57,7 +57,7 @@ export class TaskService {
   }
 
   getTasks(): Observable<Array<Task>> {
-    return this.http.get<Array<Task>>(`/api/task/all`);
+    return this.http.get<Array<Task>>(`/api/task/allByUser`);
   }
 
   refreshTasks() {

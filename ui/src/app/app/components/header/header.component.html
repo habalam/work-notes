@@ -8,19 +8,28 @@
     </div>
   </div>
   <div class="header-base">
-    <div class="menu-item" routerLink="/login" *ngIf="!currentUserName">
+    <div class="menu-item menu-active-element" routerLink="/register">
+      Registration
+    </div>
+    <div class="menu-item menu-active-element" routerLink="/login" *ngIf="!currentUserName">
       Login
     </div>
-    <div class="menu-item" routerLink="/login" *ngIf="currentUserName" (click)="logout()">
-      {{currentUserName}}|Logout
+    <div class="menu-item" *ngIf="currentUserName">
+      <div class="left menu-active-element" routerLink="/user-data-update">
+        {{currentUserName}}
+      </div>
+      <div class="left">||</div>
+      <div class="left menu-active-element" routerLink="/login" (click)="logout()">
+        Logout
+      </div>
     </div>
-    <div class="menu-item">
+    <div class="menu-item menu-active-element">
       About
     </div>
-    <div class="menu-item">
+    <div class="menu-item menu-active-element">
       Licence
     </div>
-    <div class="menu-item" routerLink="/notes">
+    <div class="menu-item menu-active-element" routerLink="/notes">
       Work-notes
     </div>
   </div>

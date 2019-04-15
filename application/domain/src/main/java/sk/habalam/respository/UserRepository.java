@@ -7,6 +7,9 @@ public interface UserRepository {
 	/** Find unique user by it's {@link User#getName()} */
 	User findUserByName(String userName);
 
+	/** Get info about existence of {@link User} with {@link User#name} OR {@link User#email}*/
+	boolean userWithNameOrEmailExists(String userName, String email);
+
 	/** Find unique user by it's {@link User#getEmail()}*/
 	User findUserByEmail(String userEmail);
 

@@ -2,17 +2,17 @@ import {ParsableJsonObject} from "./parsable-json-object";
 
 export class JsonToObjectTransformer {
 
-  public static transformObjectArrayJsonToObjects<T extends ParsableJsonObject>(arrayType: new() => T, tasks: Array<any>): Array<T> {
+  public static transformObjectArrayJsonToObjects<T extends ParsableJsonObject>(arrayType: new() => T, jsonObjects: Array<any>): Array<T> {
     let queriedTasks = new Array<T>();
-    tasks.forEach((task: any) => {
-      queriedTasks.push(this.transformJsonToObject(arrayType, task));
+    jsonObjects.forEach((jsonObject: any) => {
+      queriedTasks.push(this.transformJsonToObject(arrayType, jsonObject));
     });
     return queriedTasks;
   }
 
-  public static transformJsonToObject<T extends ParsableJsonObject>(obj: new() => T, jsonTask: any): T {
+  public static transformJsonToObject<T extends ParsableJsonObject>(obj: new() => T, jsonObject: any): T {
     const object = new obj();
-    object.parseFromJson(jsonTask);
+    object.parseFromJson(jsonObject);
     return object;
   }
 }

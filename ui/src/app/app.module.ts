@@ -11,7 +11,7 @@ import {NewTaskComponent} from './app/components/new-task/new-task.component';
 import {TasksListComponent} from './app/components/tasks-list/tasks-list.component';
 import {TaskComponent} from './app/components/task/task.component';
 import {TaskViewComponent} from './app/components/task-view/task-view.component';
-import {TaskService} from "./app/classes/task-service";
+import {TaskService} from "./app/classes/service/task/task-service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
 import {TasksByDayComponent} from './app/components/tasks-by-day/tasks-by-day.component';
@@ -19,6 +19,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {LoginComponent} from "./app/components/login/login.component";
 import {AuthService} from "./app/classes/authentication/auth.service";
 import {JwtInterceptor} from "./app/classes/authentication/jwt-interceptor";
+import {RegisterComponent} from './app/components/register/register.component';
+import {AlertComponent} from './app/components/alert/alert.component';
+import {UserDataUpdateComponent} from './app/components/user-data-update/user-data-update.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import {JwtInterceptor} from "./app/classes/authentication/jwt-interceptor";
     TaskComponent,
     TaskViewComponent,
     TasksByDayComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    AlertComponent,
+    UserDataUpdateComponent
   ],
   imports: [
     BrowserModule,

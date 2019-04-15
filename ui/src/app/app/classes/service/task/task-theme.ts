@@ -1,4 +1,4 @@
-import {ParsableJsonObject} from "./parsable-json-object";
+import {ParsableJsonObject} from "../../parsable-json-object";
 
 export class TaskTheme implements ParsableJsonObject {
 

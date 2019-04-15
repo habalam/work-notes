@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Task} from "../../classes/task";
+import {Task} from "../../classes/service/task/task";
 
 @Component({
   selector: 'wn-tasks-by-day',

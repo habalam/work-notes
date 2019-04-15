@@ -14,8 +14,8 @@ public interface TaskRepository {
 	/** Return unique {@link Task} by id */
 	Task findById(int id);
 
-	/** Return all {@link Task}'s */
-	List<Task> findAll();
+	/** Return all {@link Task}'s for {@link sk.habalam.domain.User} */
+	List<Task> findAllUserTasks(Integer userId);
 
 	/** Return all {@link Task}'s for selected day - all tasks created this day or later and which
 	 * are opened this day or closed this day or later*/
