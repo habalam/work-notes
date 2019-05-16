@@ -1,4 +1,4 @@
-INSERT INTO WN_USER values (1, 'Grondal', 'matus.habala@gmail.com', '$2a$10$7Snt4Q0ftqm9an2ICtnDd.Tq5/WwJyusiRNwfpMvAprmkieXfp7Xq', 'Y');
+INSERT INTO WN_USER values (1, 'Grondal', 'matus.habala@gmail.com', '$2a$10$HhoP.dYWA9v2laEXRY5N8O8S1cbcIJrp31Rlcaf2ZJXgZMf44oN5G', 'Y');
 INSERT INTO WN_USER values (2, 'Torgal', 'dhabala@gmail.com', '$2a$10$K18h9MYPfg7DPxhS88xx4unrtT/nRAeAEctw5huufO1QnKjKQIidW', 'Y');
 
 INSERT INTO WN_ROLE values (1, 'USER');

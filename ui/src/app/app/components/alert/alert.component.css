@@ -1,0 +1,20 @@
+.alertInfo {
+  background-color: lightgreen;
+  border-left: darkgreen 2px solid;
+  border-right: darkgreen 2px solid;
+  border-bottom: darkgreen 2px solid;
+}
+
+.alertWarning {
+  background-color: gold;
+  border-left: darkgoldenrod 2px solid;
+  border-right: darkgoldenrod 2px solid;
+  border-bottom: darkgoldenrod 2px solid;
+}
+
+.alertError {
+  background-color: red;
+  border-left: darkred 2px solid;
+  border-right: darkred 2px solid;
+  border-bottom: darkred 2px solid;
+}

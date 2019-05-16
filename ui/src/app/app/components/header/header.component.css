@@ -2,6 +2,7 @@
   flex: 1 1 auto;
   background-color: cornflowerblue;
   padding: 15px 0 15px 0;
+  border-radius: 0 10px 10px 0;
 }
 
 .menu-item {
@@ -15,7 +16,7 @@
 #header-wrapper {
   width: 100%;
   float: left;
-  padding: 15px 0 15px 0;
+  padding: 15px 0 0 0;
   display: flex;
   color: darkslategray;
 }
@@ -24,6 +25,7 @@
   float: left;
   background-color: white;
   border: 2px solid cornflowerblue;
+  border-radius: 10px 0 0 10px;
 }
 
 .header-title {
@@ -32,6 +34,7 @@
   line-height: 50px;
   font-size: 30px;
   padding: 0 10px 0 3px;
+  border-radius: 0 15px 15px 0;
 }
 
 .header-title-background {

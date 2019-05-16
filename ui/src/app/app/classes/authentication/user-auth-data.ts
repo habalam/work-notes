@@ -1,4 +1,4 @@
-export class UserData {
+export class UserAuthData {
 
   token: string;
   userName: string;

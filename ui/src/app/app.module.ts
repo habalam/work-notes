@@ -22,6 +22,7 @@ import {JwtInterceptor} from "./app/classes/authentication/jwt-interceptor";
 import {RegisterComponent} from './app/components/register/register.component';
 import {AlertComponent} from './app/components/alert/alert.component';
 import {UserDataUpdateComponent} from './app/components/user-data-update/user-data-update.component';
+import {ErrorInterceptor} from "./app/classes/error-interceptor";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {UserDataUpdateComponent} from './app/components/user-data-update/user-da
   providers: [
     TaskService,
     AuthService,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

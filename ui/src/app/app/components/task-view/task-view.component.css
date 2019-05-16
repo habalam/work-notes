@@ -31,4 +31,5 @@
   border: 2px solid cornflowerblue;
   border-radius: 0 10px 10px 10px;
   box-shadow: 4px 5px 20px grey;
+  display: flow-root;
 }

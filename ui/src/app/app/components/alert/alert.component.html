@@ -1,3 +1,6 @@
-<div *ngIf="message">
-  {{message}}
+<div style="float: left; width: 100%; text-align: center;">
+  <div style="width: 80%; display: inline-block; border-top: none; border-radius: 0 0 10px 10px; padding: 5px 0 5px 0;"
+    *ngIf="alertMessage" [ngClass]="{'alertInfo': isInfoAlert(), 'alertWarning': isWarningAlert(), 'alertError': isErrorAlert()}">
+    {{alertMessage.getText()}}
+  </div>
 </div>
