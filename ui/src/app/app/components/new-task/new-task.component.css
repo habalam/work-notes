@@ -1,12 +1,13 @@
 .new-task-div {
   display: flow-root;
-  padding: 10px;
+  padding: 10px 10px 10px 20px;
   border: 2px solid cornflowerblue;
   border-radius: 20px;
   box-shadow: 4px 5px 20px grey;
   transition: max-height 1.5s;
   max-height: 0;
   min-height: 20px;
+  font-size: 17px;
   overflow: hidden;
   color: darkslategray;
 }
@@ -61,16 +62,6 @@ select.new-task-selectbox {
 
 .new-task-wrapper:hover > .new-task-div  {
   max-height: 500px;
-}
-
-.new-task-wrapper:hover > .new-task-div > .transition-arrow {
-  transform: rotate(180deg);
-}
-
-.transition-arrow {
-  float: right;
-  margin: 2px 5px 0 0;
-  transition: transform 2.5s;
 }
 
 .new-task-title {
