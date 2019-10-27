@@ -13,7 +13,6 @@ import {TaskComponent} from './app/components/task/task.component';
 import {TaskViewComponent} from './app/components/task-view/task-view.component';
 import {TaskService} from "./app/classes/service/task/task-service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
 import {TasksByDayComponent} from './app/components/tasks-by-day/tasks-by-day.component';
 import {AppRoutingModule} from './app-routing.module';
 import {LoginComponent} from "./app/components/login/login.component";
@@ -23,6 +22,7 @@ import {RegisterComponent} from './app/components/register/register.component';
 import {AlertComponent} from './app/components/alert/alert.component';
 import {UserDataUpdateComponent} from './app/components/user-data-update/user-data-update.component';
 import {ErrorInterceptor} from "./app/classes/error-interceptor";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -43,11 +43,10 @@ import {ErrorInterceptor} from "./app/classes/error-interceptor";
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    OwlDateTimeModule,
-    OwlNativeDateTimeModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [
     TaskService,

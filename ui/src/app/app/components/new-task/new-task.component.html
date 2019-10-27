@@ -34,15 +34,14 @@
           <div class="div1 left">
             Created:
           </div>
-          <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Right now..." [(ngModel)]="newTask.created" name="createdDatePicker">
-          <owl-date-time #dt1></owl-date-time>
+          <input ngbDatepicker (click)="createdPicker.toggle()" #createdPicker=ngbDatepicker placeholder="Right now..." [(ngModel)]="newTask.created" name="createdDatePicker">
         </div>
         <div class="parameter-wrapper">
           <div class="div1 left">
             Closed:
           </div>
-          <input [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" placeholder="Undefined..." [(ngModel)]="newTask.closed" name="closedDatePicker">
-          <owl-date-time #dt2></owl-date-time>
+          <input class="form-control" placeholder="yyyy-mm-dd" (click)="closedPicker.toggle()"
+            name="dp" [(ngModel)]="newTask.closed" ngbDatepicker #closedPicker="ngbDatepicker">
         </div>
       </div>
       <div class="full-element-row">

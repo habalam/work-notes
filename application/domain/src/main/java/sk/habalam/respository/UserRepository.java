@@ -4,14 +4,17 @@ import sk.habalam.domain.User;
 
 public interface UserRepository {
 
-	/** Find unique user by it's {@link User#getName()} */
+	/** Find unique user by it's {@link User#name} */
 	User findUserByName(String userName);
 
 	/** Get info about existence of {@link User} with {@link User#name} OR {@link User#email}*/
 	boolean userWithNameOrEmailExists(String userName, String email);
 
-	/** Find unique user by it's {@link User#getEmail()}*/
+	/** Find unique user by it's {@link User#email}*/
 	User findUserByEmail(String userEmail);
+
+	/** Find unique user by it's {@link User#id}*/
+	User findUserById(Integer userId);
 
 	/** Persist new {@link User} to DB*/
 	void createUser(User user);

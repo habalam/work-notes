@@ -19,6 +19,10 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  public hasRole(role: string) {
+    return this.currentUserSubject.value.roles.indexOf(role) != -1;
+  }
+
   public login(loginData: any) {
     const httpOptions = {
       headers: new HttpHeaders({

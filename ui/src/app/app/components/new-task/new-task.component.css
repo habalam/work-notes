@@ -4,7 +4,7 @@
   border: 2px solid cornflowerblue;
   border-radius: 20px;
   box-shadow: 4px 5px 20px grey;
-  transition: max-height 1.5s;
+  transition: max-height 5s;
   max-height: 0;
   min-height: 20px;
   font-size: 17px;
@@ -61,7 +61,19 @@ select.new-task-selectbox {
 }
 
 .new-task-wrapper:hover > .new-task-div  {
+  /*max-height: 500px;*/
+  /*transition: max-height 1s;*/
+}
+
+.new-task-div {
   max-height: 500px;
+}
+
+.new-task-wrapper:hover > .new-task-div .textarea-wrapper {
+  float: left;
+  margin: 5px 0 0 0;
+  display: flex;
+  width: 100%;
 }
 
 .new-task-title {

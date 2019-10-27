@@ -14,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import sk.habalam.domain.support.Role;
 import sk.habalam.service.UserAuthenticationService;
 
 @Configuration
@@ -41,8 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
 			.antMatchers("/auth/login").permitAll()
 			.antMatchers("/user/registration").permitAll()
-			.antMatchers("/user/**").hasAuthority("USER")
-			.antMatchers("/task/**").hasAuthority("USER")
+			.antMatchers("/user/**").hasAuthority(Role.USER.name())
+			.antMatchers("/task/delete").hasAuthority(Role.ADMIN.name())
+			.antMatchers("/task/**").hasAuthority(Role.USER.name())
 			//TODO copy/paste reevaluate
 			.anyRequest().authenticated().and().csrf()
 			.disable().exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint()).and()

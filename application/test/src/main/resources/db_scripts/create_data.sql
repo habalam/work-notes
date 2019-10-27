@@ -1,10 +1,14 @@
-INSERT INTO WN_USER values (1, 'Grondal', 'matus.habala@gmail.com', '$2a$10$HhoP.dYWA9v2laEXRY5N8O8S1cbcIJrp31Rlcaf2ZJXgZMf44oN5G', 'Y');
-INSERT INTO WN_USER values (2, 'Torgal', 'dhabala@gmail.com', '$2a$10$K18h9MYPfg7DPxhS88xx4unrtT/nRAeAEctw5huufO1QnKjKQIidW', 'Y');
+INSERT INTO WN_USER values (1, 'Grondal', 'matus.habala@gmail.com', '$2a$10$1sMmWbr6UVNO2VDl.B/Enu1/QtalFqaXBJHk57eL1mIdeo9iDkNAe', 'Y'); /*password: HC92001*/
+INSERT INTO WN_USER values (2, 'Torgal', 'dhabala@gmail.com', '$2a$10$K18h9MYPfg7DPxhS88xx4unrtT/nRAeAEctw5huufO1QnKjKQIidW', 'Y'); /*password: hovno*/
+INSERT INTO WN_USER values (3, 'BASE_USER', 'base.user@gmail.com', '$2a$10$kzR/3tZJKx2kUqD4mYBQLu9qLXwzjodxocU4qw3PxQ6YUCtVUEXKC', 'Y'); /*password: baseuserpass*/
 
 INSERT INTO WN_ROLE values (1, 'USER');
+INSERT INTO WN_ROLE values (2, 'ADMIN');
 
 INSERT INTO WN_USER_ROLE values (1, 1);
+INSERT INTO WN_USER_ROLE values (1, 2);
 INSERT INTO WN_USER_ROLE values (2, 1);
+INSERT INTO WN_USER_ROLE values (2, 2);
 
 INSERT INTO WN_TASK_THEME VALUES (1, 'Work-Notes', 'Vlastný projekt s cieľom vytvoriť niečo vlastné od nápadu cez realizáciu až po deployment',
 'VALID', PARSEDATETIME('22-01-2019 8:00:00', 'dd-MM-yyyy hh:mm:ss'), null, 1);

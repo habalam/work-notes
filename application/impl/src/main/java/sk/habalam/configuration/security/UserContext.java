@@ -6,7 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class UserContext {
 
 	public static String getCurrentUserName() {
-		UserDetailsCustom userData = checkAndTransformAuthentication(SecurityContextHolder.getContext().getAuthentication());
+		UserDetailsCustom userData = checkAndTransformAuthentication();
 		if (userData != null) {
 			return userData.getUsername();
 		}
@@ -14,14 +14,14 @@ public class UserContext {
 	}
 
 	public static Integer getCurrentUserId() {
-		UserDetailsCustom userData = checkAndTransformAuthentication(SecurityContextHolder.getContext().getAuthentication());
+		UserDetailsCustom userData = checkAndTransformAuthentication();
 		if (userData != null) {
 			return userData.getUserId();
 		}
 		return null;
 	}
 
-	private static UserDetailsCustom checkAndTransformAuthentication(Authentication authentication) {
+	private static UserDetailsCustom checkAndTransformAuthentication() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth == null) {
 			return null;

@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthService} from "../../classes/authentication/auth.service";
 import {AuthData} from "../../classes/authentication/auth-data";
 import {Router} from "@angular/router";
+import {AlertService} from "../../classes/service/alert/alert.service";
 
 @Component({
   selector: 'wn-login',
@@ -9,10 +10,17 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  password: String;
-  login: String;
+  password: String = null;
+  login: String = null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  @HostListener("document:keypress", ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.code === "Enter") {
+      this.loginUser();
+    }
+  }
+
+  constructor(private authService: AuthService, private router: Router, private alertService: AlertService) {
     this.authService.observableUser.subscribe(user => {
       if (user) {
         this.router.navigate(['/notes']);
@@ -27,6 +35,10 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
+    if (this.password == null || this.login == null) {
+      this.alertService.addErrorMessage("Login and Password must be set up");
+      return;
+    }
     this.authService.login(new AuthData(this.login, this.password));
   }
 }

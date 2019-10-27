@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           location.assign(ErrorInterceptor.LOGIN_URL);
         }
         //TODO prečo by som mal v tomto prípade reloadovať
-        //location.reload();
+        // location.reload();
       }
 
       const error = err.error.message || err.statusText;

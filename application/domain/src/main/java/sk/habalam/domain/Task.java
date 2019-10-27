@@ -132,7 +132,7 @@ public class Task extends BaseEntity<Integer> {
 			", state=" + state.name() +
 			", created=" + BaseUtils.formatDateTimeUiFormat(created) +
 			", closed=" + BaseUtils.formatDateTimeUiFormat(closed) +
-			", user=" + user.getId() +
+			", user=" + (user != null ? user.getId() : null) +
 			'}';
 	}
 }

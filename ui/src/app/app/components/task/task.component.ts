@@ -2,6 +2,7 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Task} from "../../classes/service/task/task";
 import {NgForm} from "@angular/forms";
 import {TaskService} from "../../classes/service/task/task-service";
+import {AuthService} from "../../classes/authentication/auth.service";
 
 @Component({
   selector: 'wn-task',
@@ -19,7 +20,7 @@ export class TaskComponent implements OnInit {
   public priorities: Array<string>;
   public states: Array<string>;
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, public authService: AuthService) {
     this.taskService.observablePriorities.subscribe((priorities: Array<string>) => {
       this.priorities = priorities;
     });

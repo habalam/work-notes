@@ -28,6 +28,11 @@ public class UserRepositoryImpl extends RepositoryBase implements UserRepository
 	}
 
 	@Override
+	public User findUserById(Integer userId) {
+		return entityManager.find(User.class, userId);
+	}
+
+	@Override
 	@Transactional
 	public void createUser(User user) {
 		entityManager.persist(user);

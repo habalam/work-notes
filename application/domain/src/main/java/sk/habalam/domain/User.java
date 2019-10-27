@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "WN_USER")
@@ -67,6 +68,7 @@ public class User extends BaseEntity<Integer> {
 	}
 
 	@Column(name = "ACTIVE", nullable = false)
+	@Type(type = "yes_no")
 	public boolean isActive() {
 		return active;
 	}

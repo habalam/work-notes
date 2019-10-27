@@ -11,7 +11,9 @@ const routes: Routes = [
   {path: 'notes', component: BodyComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'user-data-update', component: UserDataUpdateComponent}
+  {path: 'user-data-update', component: UserDataUpdateComponent},
+  {path: '', redirectTo: '/notes', pathMatch: 'full'},
+  {path: '**', redirectTo: '/notes', pathMatch: 'full'}
 ];
 
 @NgModule({
